@@ -9,11 +9,13 @@ const maps: Record<
   string,
   { scale: number; position: [number, number, number] }
 > = {
-  issum_the_town_on_capital_isle: {
+  map: {
     scale: 0.4,
     position: [-9, -6.2, -1],
   },
 };
+
+const MAP_NAME = "map";
 
 export const Experience = () => {
   const shadowCameraRef = useRef<ThreeOrthographicCamera>(null);
@@ -40,11 +42,11 @@ export const Experience = () => {
       </directionalLight>
 
       {/* Se envuelven todos los elementos que deben ser afectados por las físicas */}
-      <Physics key={"issum_the_town_on_capital_isle"}>
+      <Physics key={MAP_NAME}>
         <Map
-          scale={maps["issum_the_town_on_capital_isle"].scale}
-          position={maps["issum_the_town_on_capital_isle"].position}
-          model={`models/${"issum_the_town_on_capital_isle"}.glb`}
+          scale={maps[MAP_NAME].scale}
+          position={maps[MAP_NAME].position}
+          model={`models/${MAP_NAME}.glb`}
         />
         <CharacterController />
       </Physics>
