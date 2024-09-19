@@ -10,27 +10,10 @@ import { MathUtils, Vector3, Group } from "three";
 import { Character } from "./Character";
 import { lerpAngle } from "../../utils/utils";
 import { ROTATION_SPEED, RUN_SPEED, WALK_SPEED } from "../../utils/constants";
-
-// const Modal = ({ onClose }) => (
-//   <div
-//     style={{
-//       position: "absolute",
-//       top: "50%",
-//       left: "50%",
-//       transform: "translate(-50%, -50%)",
-//       backgroundColor: "white",
-//       padding: "20px",
-//       zIndex: 1000,
-//     }}
-//   >
-//     <h2>Modal Abierto</h2>
-//     <p>¡Has llegado a la coordenada!</p>
-//     <button onClick={onClose}>Cerrar</button>
-//   </div>
-// );
+import { useGame } from "../../context/GameContext";
 
 export const CharacterController = () => {
-  // const [showModal, setShowModal] = useState(false);
+  const { openPhishingGame } = useGame();
 
   const rb = useRef<RapierRigidBody | null>(null);
   const container = useRef<Group | null>(null);
@@ -49,28 +32,29 @@ export const CharacterController = () => {
 
   // Coordenada objetivo
   // const targetPosition = { x: -9.46, y: -6.1, z: 1.52 };
-  // const proximityThreshold = 1.0; // Definir un umbral de cercanía
+  const targetPosition = { x: -9.51, y: -6.06, z: 1.27 };
+  const proximityThreshold = 0.6; // Definir un umbral de cercanía
 
   useFrame(() => {
     if (rb.current) {
       const pos = rb.current.translation();
-      console.log({
-        x: pos.x.toFixed(2),
-        y: pos.y.toFixed(2),
-        z: pos.z.toFixed(2),
-      });
+      // console.log({
+      //   x: pos.x.toFixed(2),
+      //   y: pos.y.toFixed(2),
+      //   z: pos.z.toFixed(2),
+      // });
 
       // Calcular distancia entre el personaje y la coordenada objetivo
-      // const distance = Math.sqrt(
-      //   (pos.x - targetPosition.x) ** 2 +
-      //     (pos.y - targetPosition.y) ** 2 +
-      //     (pos.z - targetPosition.z) ** 2
-      // );
+      const distance = Math.sqrt(
+        (pos.x - targetPosition.x) ** 2 +
+          (pos.y - targetPosition.y) ** 2 +
+          (pos.z - targetPosition.z) ** 2
+      );
 
       // Si está lo suficientemente cerca, mostrar el modal
-      // if (distance < proximityThreshold) {
-      //   setShowModal(true);
-      // }
+      if (distance < proximityThreshold) {
+        openPhishingGame();
+      }
     }
   });
 

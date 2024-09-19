@@ -9,17 +9,13 @@ const maps: Record<
   string,
   { scale: number; position: [number, number, number] }
 > = {
-  issum_the_town_on_capital_isle: {
-    scale: 0.4,
-    position: [-9, -6.2, -1],
-  },
-  invasion_halloween_map: {
+  map: {
     scale: 0.4,
     position: [-9, -6.2, -1],
   },
 };
 
-const MAP_NAME = "invasion_halloween_map";
+const MAP_NAME = "map";
 
 export const Experience = () => {
   const shadowCameraRef = useRef<ThreeOrthographicCamera>(null);
