@@ -1,7 +1,7 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 import { useEffect, useRef } from "react";
-import { MapProps } from "../../types/types";
+import { MapProps } from "../../types";
 import { Group, Mesh } from "three";
 
 export const Map = ({ model, ...props }: MapProps) => {
