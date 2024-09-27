@@ -3,7 +3,9 @@ import { createContext, ReactNode, useContext, useState } from "react";
 interface GameContext {
   showModal: boolean;
   showPhishingGame: boolean;
+  isActivePhishing: boolean;
   openPhishingGame: () => void;
+  closePhishingGame: () => void;
   openModal: () => void;
   closeModal: () => void;
 }
@@ -12,6 +14,8 @@ const GameContext = createContext<GameContext | undefined>(undefined);
 
 const GameProvider = ({ children }: { children: ReactNode }) => {
   const [showModal, setShowModal] = useState(false);
+
+  const [isActivePhishing, setIsActivePhishing] = useState(false);
   const [showPhishingGame, setShowPhishingGame] = useState(false);
 
   const handleOpenModal = () => {
@@ -24,6 +28,12 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
 
   const handleOpenPhishingGame = () => {
     setShowPhishingGame(true);
+    setIsActivePhishing(true);
+  };
+
+  const handleClosePhishingGame = () => {
+    setShowPhishingGame(false);
+    setIsActivePhishing(false);
   };
 
   return (
@@ -31,7 +41,9 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
       value={{
         showModal,
         showPhishingGame,
+        isActivePhishing,
         openPhishingGame: handleOpenPhishingGame,
+        closePhishingGame: handleClosePhishingGame,
         openModal: handleOpenModal,
         closeModal: handleCloseModal,
       }}

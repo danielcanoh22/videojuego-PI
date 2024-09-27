@@ -1,11 +1,11 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { CharacterProps } from "../../types/types";
+import { CharacterProps } from "../../types";
 
 export function Character({ animation, ...props }: CharacterProps) {
   const group = useRef<THREE.Group>();
-  const { scene, animations } = useGLTF("/models/cupguy.glb");
+  const { scene, animations } = useGLTF("/assets/models/cupguy.glb");
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
@@ -23,4 +23,4 @@ export function Character({ animation, ...props }: CharacterProps) {
   return <primitive object={scene} {...props} />;
 }
 
-useGLTF.preload("/models/cupguy.glb");
+useGLTF.preload("/assets/models/cupguy.glb");

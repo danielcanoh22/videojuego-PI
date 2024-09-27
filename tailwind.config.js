@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        minigameBackground: "url('/img/background.png')",
+        minigameBackground: "url('/assets/img/phishing/bg-phishing2.png')",
       },
     },
   },

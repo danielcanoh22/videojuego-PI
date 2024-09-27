@@ -13,7 +13,7 @@ import { ROTATION_SPEED, RUN_SPEED, WALK_SPEED } from "../../utils/constants";
 import { useGame } from "../../context/GameContext";
 
 export const CharacterController = () => {
-  const { openPhishingGame } = useGame();
+  const { openPhishingGame, isActivePhishing } = useGame();
 
   const rb = useRef<RapierRigidBody | null>(null);
   const container = useRef<Group | null>(null);
@@ -34,6 +34,7 @@ export const CharacterController = () => {
   // const targetPosition = { x: -9.46, y: -6.1, z: 1.52 };
   const targetPosition = { x: -9.51, y: -6.06, z: 1.27 };
   const proximityThreshold = 0.6; // Definir un umbral de cercanía
+  const newSafePosition = { x: -8.56, y: -6.13, z: 2.66 };
 
   useFrame(() => {
     if (rb.current) {
@@ -54,63 +55,73 @@ export const CharacterController = () => {
       // Si está lo suficientemente cerca, mostrar el modal
       if (distance < proximityThreshold) {
         openPhishingGame();
+
+        // Mover al personaje a la nueva ubicación segura
+        rb.current.setTranslation(
+          { x: newSafePosition.x, y: newSafePosition.y, z: newSafePosition.z },
+          true
+        );
+
+        setAnimation("idle");
       }
     }
   });
 
   useFrame(({ camera }) => {
-    // Personaje
-    if (rb.current) {
-      const vel = rb.current.linvel();
+    if (!isActivePhishing) {
+      // Personaje
+      if (rb.current) {
+        const vel = rb.current.linvel();
 
-      const movement = {
-        x: 0,
-        z: 0,
-      };
+        const movement = {
+          x: 0,
+          z: 0,
+        };
 
-      if (get().forward) {
-        movement.z = 1;
-      }
-      if (get().backward) {
-        movement.z = -1;
-      }
-
-      const speed = get().run ? RUN_SPEED : WALK_SPEED;
-
-      if (get().left) {
-        movement.x = 1;
-      }
-      if (get().right) {
-        movement.x = -1;
-      }
-
-      if (movement.x !== 0) {
-        rotationTarget.current += ROTATION_SPEED * movement.x;
-      }
-
-      if (movement.x !== 0 || movement.z !== 0) {
-        characterRotationTarget.current = Math.atan2(movement.x, movement.z);
-        vel.x =
-          Math.sin(rotationTarget.current + characterRotationTarget.current) *
-          speed;
-        vel.z =
-          Math.cos(rotationTarget.current + characterRotationTarget.current) *
-          speed;
-        if (speed === RUN_SPEED) {
-          setAnimation("run");
-        } else {
-          setAnimation("walk");
+        if (get().forward) {
+          movement.z = 1;
         }
-      } else {
-        setAnimation("idle");
-      }
-      character.current!.rotation.y = lerpAngle(
-        character.current!.rotation.y,
-        characterRotationTarget.current,
-        0.1
-      );
+        if (get().backward) {
+          movement.z = -1;
+        }
 
-      rb.current.setLinvel(vel, true);
+        const speed = get().run ? RUN_SPEED : WALK_SPEED;
+
+        if (get().left) {
+          movement.x = 1;
+        }
+        if (get().right) {
+          movement.x = -1;
+        }
+
+        if (movement.x !== 0) {
+          rotationTarget.current += ROTATION_SPEED * movement.x;
+        }
+
+        if (movement.x !== 0 || movement.z !== 0) {
+          characterRotationTarget.current = Math.atan2(movement.x, movement.z);
+          vel.x =
+            Math.sin(rotationTarget.current + characterRotationTarget.current) *
+            speed;
+          vel.z =
+            Math.cos(rotationTarget.current + characterRotationTarget.current) *
+            speed;
+          if (speed === RUN_SPEED) {
+            setAnimation("run");
+          } else {
+            setAnimation("walk");
+          }
+        } else {
+          setAnimation("idle");
+        }
+        character.current!.rotation.y = lerpAngle(
+          character.current!.rotation.y,
+          characterRotationTarget.current,
+          0.1
+        );
+
+        rb.current.setLinvel(vel, true);
+      }
     }
 
     // Cámara
