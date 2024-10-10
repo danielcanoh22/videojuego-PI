@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
+//DATOS GLOBALES --
 
 interface GameContext {
   showModal: boolean;
@@ -35,6 +36,7 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     setShowPhishingGame(false);
     setIsActivePhishing(false);
   };
+
 
   return (
     <GameContext.Provider

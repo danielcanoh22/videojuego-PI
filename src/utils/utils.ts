@@ -34,4 +34,14 @@ export const calcScore = (
   });
 
   return [pointsEarned, lostPoints];
+
+  
 };
+
+export const getRandomPosition = () => {
+  const x = Math.random() * 20 - 10; 
+  const y = Math.random() * 20 - 10;
+  const z = Math.random() * 2;
+  return { x, y, z };
+};
+
