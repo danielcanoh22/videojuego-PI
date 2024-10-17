@@ -4,6 +4,12 @@ import { Map } from "./Map";
 import { Physics } from "@react-three/rapier";
 import { CharacterController } from "../character/CharacterController";
 import { OrthographicCamera as ThreeOrthographicCamera } from "three";
+import { EnemySpawner } from "../minigames/trojan/EnemySpawner";
+// import { EnemyController } from "../character/EnemyController.tsx";
+// import { EnemySpawner } from "../minigames/trojan/EnemySpawner.tsx";
+
+
+// SE LLAMA TODO - MAPA, ARCHIVO CHARACTER
 
 const maps: Record<
   string,
@@ -19,6 +25,8 @@ const MAP_NAME = "map";
 
 export const Experience = () => {
   const shadowCameraRef = useRef<ThreeOrthographicCamera>(null);
+
+
 
   return (
     <>
@@ -49,6 +57,7 @@ export const Experience = () => {
           model={`/assets/models/${MAP_NAME}.glb`}
         />
         <CharacterController />
+        <EnemySpawner enemyCount={3}/>
       </Physics>
     </>
   );

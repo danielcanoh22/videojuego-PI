@@ -31,7 +31,7 @@ export const CharacterController = () => {
   const [, get] = useKeyboardControls();
 
   // Coordenada objetivo
-  // const targetPosition = { x: -9.46, y: -6.1, z: 1.52 };
+  // const targetPosition2 = { x: -15.21, y: -6.00, z: 0.35 };
   const targetPosition = { x: -9.51, y: -6.06, z: 1.27 };
   const proximityThreshold = 0.6; // Definir un umbral de cercanía
   const newSafePosition = { x: -8.56, y: -6.13, z: 2.66 };
@@ -39,11 +39,11 @@ export const CharacterController = () => {
   useFrame(() => {
     if (rb.current) {
       const pos = rb.current.translation();
-      // console.log({
-      //   x: pos.x.toFixed(2),
-      //   y: pos.y.toFixed(2),
-      //   z: pos.z.toFixed(2),
-      // });
+          //  console.log({
+          //    x: pos.x.toFixed(2),
+          //    y: pos.y.toFixed(2),
+          //    z: pos.z.toFixed(2),
+          //  });
 
       // Calcular distancia entre el personaje y la coordenada objetivo
       const distance = Math.sqrt(

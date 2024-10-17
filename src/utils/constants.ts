@@ -27,3 +27,7 @@ export const EMAIL_PARTS = {
   email: "Correo electrónico",
   body: "Mensaje",
 };
+ export const SCENE = {
+
+  //SCENE
+ };
