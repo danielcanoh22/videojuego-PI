@@ -1,7 +1,8 @@
-import { ContentData } from "../../../../types";
+import { ContentData, SmishingData } from "../../../../types";
 import {
   GameImage,
   GameLayout,
+  Message,
   NextScreenButton,
   Score,
 } from "../components/common";
@@ -18,7 +19,7 @@ export const Feedback = ({
   score,
   additionalPoints,
 }: {
-  content: ContentData;
+  content: ContentData | SmishingData;
   positiveFeedback: boolean | null;
   index: number;
   score: number;
@@ -41,25 +42,59 @@ export const Feedback = ({
               <span className="font-bold">Respuesta:</span> {answer}
             </h3>
 
-            <div className="flex flex-col gap-4 mt-12 text-2xl mb-6">
-              <FeedbackItem item="Asunto">
-                {content.feedback.subject}
-              </FeedbackItem>
-              <FeedbackItem item="Remitente">
-                {content.feedback.sender}
-              </FeedbackItem>
-              <FeedbackItem item="Correo electrónico">
-                {content.feedback.email}
-              </FeedbackItem>
-              <FeedbackItem item="Mensaje">
-                {content.feedback.body}
-              </FeedbackItem>
+            {!content.isSmishing && (
+              <div className="flex flex-col gap-4 mt-12 text-2xl mb-6">
+                <FeedbackItem item="Asunto">
+                  {content.feedback.subject}
+                </FeedbackItem>
+                <FeedbackItem item="Remitente">
+                  {content.feedback.sender}
+                </FeedbackItem>
+                <FeedbackItem item="Correo electrónico">
+                  {content.feedback.email}
+                </FeedbackItem>
+                <FeedbackItem item="Mensaje">
+                  {content.feedback.body}
+                </FeedbackItem>
 
-              <ScoreSummary
-                correctAnswer={isCorrect}
-                additionalPoints={additionalPoints}
-              />
-            </div>
+                <ScoreSummary
+                  correctAnswer={isCorrect}
+                  additionalPoints={additionalPoints}
+                  content={content}
+                />
+                {/* 
+                <Message styles="bg-red-100 shadow-md">
+                  <p className="font-bold">
+                    ⛔ Tipo de ataque:{" "}
+                    <span className="font-normal">Phishing</span>
+                  </p>
+                </Message> */}
+              </div>
+            )}
+
+            {content.isSmishing && (
+              <div className="flex flex-col gap-4 mt-12 text-2xl mb-6">
+                <FeedbackItem item="Número telefónico">
+                  {content.feedback.number}
+                </FeedbackItem>
+                <FeedbackItem item="Mensaje">
+                  {content.feedback.message}
+                </FeedbackItem>
+
+                <ScoreSummary
+                  correctAnswer={isCorrect}
+                  additionalPoints={additionalPoints}
+                  content={content}
+                />
+
+                {/* <Message styles="bg-red-100 shadow-md">
+                  <p className="font-bold">
+                    ⛔ Tipo de ataque:{" "}
+                    <span className="font-normal">Smishing</span>
+                  </p>
+                </Message> */}
+              </div>
+            )}
 
             {!finalLevel && (
               <NextScreenButton onClick={onScreen} styles="">
@@ -72,11 +107,24 @@ export const Feedback = ({
               </NextScreenButton>
             )}
           </div>
-          <div>
-            <GameImage
-              image={content.feedback.image}
-              title="Imagen con los elementos sospechosos del correo electrónico señalados."
-            />
+          <div className="flex flex-col items-center gap-4">
+            <Message styles="bg-red-100 shadow-md text-2xl w-max">
+              <p className="font-bold">
+                ⛔ Tipo de ataque:{" "}
+                <span className="font-normal">
+                  {content.isSmishing ? "Smishing" : "Phishing"}
+                </span>
+              </p>
+            </Message>
+            <div
+              className="justify-self-center"
+              style={content.isSmishing ? { width: "35%" } : {}}
+            >
+              <GameImage
+                image={content.feedback.image}
+                title="Imagen con los elementos sospechosos del correo electrónico señalados."
+              />
+            </div>
           </div>
         </div>
       </div>

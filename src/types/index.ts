@@ -35,3 +35,16 @@ export interface ContentData {
     image: string;
   };
 }
+
+export interface SmishingData {
+  isSmishing: boolean;
+  number: string;
+  message: string;
+  isSuspicious: boolean;
+  difficulty: string;
+  feedback: {
+    number: string;
+    message: string;
+    image: string;
+  };
+}

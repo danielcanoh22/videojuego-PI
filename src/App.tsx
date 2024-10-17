@@ -27,10 +27,13 @@ function App() {
       </KeyboardControls>
       {showPhishingGame && <PhishingGame />}
 
-      {/* <PhishingGame /> */}
+      <PhishingGame />
       {showPhishingGame && (
         <div className="w-full h-full bg-black/50 fixed top-0 left-0 z-10"></div>
       )}
+      {/* <DndProvider backend={HTML5Backend}>
+        <Smishing />
+      </DndProvider> */}
     </>
   );
 }

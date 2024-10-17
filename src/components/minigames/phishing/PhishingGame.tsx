@@ -15,7 +15,16 @@ export const PhishingGame = () => {
   const [score, setScore] = useState(0);
   const [additionalPoints, setAdditionalPoints] = useState([0, 0]);
 
-  const currentEmail = emailsData[emailsIndex];
+  let currentEmail = emailsData[emailsIndex];
+
+  const handleRestartGame = () => {
+    setScreen(1);
+    setPositiveAnswer(null);
+    setEmailsIndex(0);
+    setElements([]);
+    setScore(0);
+    setAdditionalPoints([0, 0]);
+  };
 
   const handleNextGameLevel = () => {
     setPositiveAnswer(null);
@@ -31,12 +40,14 @@ export const PhishingGame = () => {
   };
 
   const handleChooseOption = (option: boolean) => {
-    if (option && !elements.length) return;
+    if (!currentEmail.isSmishing) {
+      if (option && !elements.length) return;
 
-    if (option === currentEmail.isSuspicious) {
-      const points = calcScore(elements, currentEmail);
+      if (option === currentEmail.isSuspicious) {
+        const points = calcScore(elements, currentEmail);
 
-      setAdditionalPoints(points);
+        setAdditionalPoints(points);
+      }
     }
 
     setPositiveAnswer(option);
@@ -101,7 +112,9 @@ export const PhishingGame = () => {
         />
       )}
 
-      {screen === 4 && <GameOver screen={screen} />}
+      {screen === 4 && (
+        <GameOver screen={screen} score={score} onRestart={handleRestartGame} />
+      )}
     </Window>
   );
 };

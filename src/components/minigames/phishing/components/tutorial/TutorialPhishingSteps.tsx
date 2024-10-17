@@ -1,4 +1,4 @@
-export const TutorialSteps = () => {
+export const TutorialPhishingSteps = () => {
   return (
     <ul className="text-2xl">
       <li>1. Debes identificar si el correo mostrado es sospechoso.</li>

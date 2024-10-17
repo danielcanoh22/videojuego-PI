@@ -6,6 +6,8 @@ export const RUN_SPEED = 1.6;
 export const ROTATION_SPEED = degToRad(0.8);
 
 // Phishing game
+export const MIN_SCORE = 100;
+
 export const emailElements = {
   SUBJECT: "Asunto",
   SENDER: "Remitente",

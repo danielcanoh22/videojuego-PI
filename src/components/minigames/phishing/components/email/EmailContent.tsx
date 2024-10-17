@@ -1,6 +1,10 @@
 import { BsTrash } from "react-icons/bs";
 import { EmailButton } from "./EmailButton";
-import { ContentData, EmailElementType } from "../../../../../types";
+import {
+  ContentData,
+  EmailElementType,
+  SmishingData,
+} from "../../../../../types";
 import { EMAIL_PARTS } from "../../../../../utils";
 
 export const EmailContent = ({
@@ -8,7 +12,7 @@ export const EmailContent = ({
   content,
 }: {
   onAddElement: (element: EmailElementType) => void;
-  content: ContentData;
+  content: ContentData | SmishingData;
 }) => {
   const addElement = (element: string) => {
     const id = crypto.randomUUID();
