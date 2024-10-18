@@ -11,6 +11,7 @@ import { Character } from "./Character";
 import { lerpAngle } from "../../utils/utils";
 import { ROTATION_SPEED, RUN_SPEED, WALK_SPEED } from "../../utils/constants";
 import { useGame } from "../../context/GameContext";
+import Bullet from "./Bullet";
 
 export const CharacterController = () => {
   const { openPhishingGame, isActivePhishing } = useGame();
@@ -30,6 +31,10 @@ export const CharacterController = () => {
   const cameraLookAt = useRef<Vector3>(new Vector3());
   const [, get] = useKeyboardControls();
 
+  const [bullets, setBullets] = useState([]); // Estado para las bolitas
+  const [canShoot, setCanShoot] = useState(true);
+  const [lastShotTime, setLastShotTime] = useState(0);
+
   // Coordenada objetivo
   // const targetPosition2 = { x: -15.21, y: -6.00, z: 0.35 };
   const targetPosition = { x: -9.51, y: -6.06, z: 1.27 };
@@ -39,11 +44,11 @@ export const CharacterController = () => {
   useFrame(() => {
     if (rb.current) {
       const pos = rb.current.translation();
-          //  console.log({
-          //    x: pos.x.toFixed(2),
-          //    y: pos.y.toFixed(2),
-          //    z: pos.z.toFixed(2),
-          //  });
+      // console.log({
+      //   x: pos.x.toFixed(2),
+      //   y: pos.y.toFixed(2),
+      //   z: pos.z.toFixed(2),
+      // });
 
       // Calcular distancia entre el personaje y la coordenada objetivo
       const distance = Math.sqrt(
@@ -140,6 +145,33 @@ export const CharacterController = () => {
 
       camera.lookAt(cameraLookAt.current);
     }
+
+    const currentTime = Date.now();
+
+    // // Disparo de bolitas
+    if (rb.current && get().shoot && currentTime - lastShotTime > 2000) {
+      // 500 ms de espera entre disparos
+      // Obtener la rotación actual del personaje
+      const rotation = character.current.rotation.y; // Rotación en el eje Y
+      const direction = new Vector3(
+        Math.sin(rotation), // Calcula la dirección X
+        0, // La dirección Y será 0 porque el proyectil se mueve en el plano XZ
+        Math.cos(rotation) // Calcula la dirección Z
+      ).normalize(); // Normaliza la dirección
+
+      const position = rb.current.translation(); // Posición actual del personaje
+
+      // Agregar una nueva bolita al estado
+      setBullets((prev) => [
+        ...prev,
+        {
+          position: new Vector3(position.x, position.y, position.z),
+          direction,
+        },
+      ]);
+
+      setLastShotTime(currentTime); // Actualiza el tiempo del último disparo
+    }
   });
   // -0.1
   return (
@@ -157,6 +189,18 @@ export const CharacterController = () => {
 
       {/* Mostrar modal si el personaje está cerca de la coordenada */}
       {/* {showModal && <Modal onClose={() => setShowModal(false)} />} */}
+
+      {/* Renderiza las bolitas disparadas */}
+      {bullets.map((bullet, index) => (
+        <Bullet
+          key={index}
+          position={bullet.position}
+          direction={bullet.direction}
+          onRemove={() =>
+            setBullets((prev) => prev.filter((_, i) => i !== index))
+          }
+        />
+      ))}
     </>
   );
 };

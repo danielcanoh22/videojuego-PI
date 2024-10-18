@@ -12,6 +12,7 @@ const keyboardMap = [
   { name: "left", keys: ["ArrowLeft", "KeyA"] },
   { name: "right", keys: ["ArrowRight", "KeyD"] },
   { name: "run", keys: ["Shift"] },
+  { name: "shoot", keys: ["Space"] },
 ];
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
       </KeyboardControls>
       {showPhishingGame && <PhishingGame />}
 
-      <PhishingGame />
+      {/* <PhishingGame /> */}
       {showPhishingGame && (
         <div className="w-full h-full bg-black/50 fixed top-0 left-0 z-10"></div>
       )}
