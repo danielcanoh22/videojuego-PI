@@ -5,6 +5,7 @@ import { useGame } from "./context/GameContext";
 import { PhishingGame } from "./components/minigames/phishing/PhishingGame";
 
 import "@fontsource-variable/exo-2";
+import { TrojanWindow } from "./components/minigames/trojan/components/TrojanWindow";
 
 const keyboardMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -16,7 +17,7 @@ const keyboardMap = [
 ];
 
 function App() {
-  const { showPhishingGame } = useGame();
+  const { showPhishingGame, showModal } = useGame();
 
   return (
     <>
@@ -27,6 +28,8 @@ function App() {
         </Canvas>
       </KeyboardControls>
       {showPhishingGame && <PhishingGame />}
+
+      {showModal && <TrojanWindow />}
 
       {/* <PhishingGame /> */}
       {showPhishingGame && (

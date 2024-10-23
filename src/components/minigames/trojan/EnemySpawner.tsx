@@ -1,6 +1,7 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { EnemyController } from "../../character/EnemyController";
 import enemyPositions from "./enemyPositions.json";
+import { useGame } from "../../../context/GameContext";
 
 interface Coordinates {
   x: number;
@@ -45,7 +46,13 @@ export const EnemySpawner: React.FC<EnemySpawnerProps> = ({
   // Memoize the positions to prevent unnecessary recalculations
   const enemyPositions2 = useMemo(() => {
     return getUniqueRandomPositions(enemyCount, positions);
-  }, [enemyCount, positions]);
+  }, [enemyCount]);
+
+  const { setEnemies } = useGame();
+
+  useEffect(() => {
+    setEnemies(enemyPositions2);
+  }, [enemyPositions2, setEnemies]);
 
   // const enemyPositions = [
   //   {

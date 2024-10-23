@@ -5,10 +5,12 @@ interface GameContext {
   showModal: boolean;
   showPhishingGame: boolean;
   isActivePhishing: boolean;
+  enemies: object[];
   openPhishingGame: () => void;
   closePhishingGame: () => void;
   openModal: () => void;
   closeModal: () => void;
+  setEnemies: (positions: object[]) => void;
 }
 
 const GameContext = createContext<GameContext | undefined>(undefined);
@@ -18,6 +20,8 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
 
   const [isActivePhishing, setIsActivePhishing] = useState(false);
   const [showPhishingGame, setShowPhishingGame] = useState(false);
+
+  const [enemies, setEnemies] = useState<object[]>([{}]);
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -37,6 +41,9 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     setIsActivePhishing(false);
   };
 
+  const handleEnemies = (positions: object[]) => {
+    setEnemies(positions);
+  };
 
   return (
     <GameContext.Provider
@@ -44,10 +51,12 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
         showModal,
         showPhishingGame,
         isActivePhishing,
+        enemies,
         openPhishingGame: handleOpenPhishingGame,
         closePhishingGame: handleClosePhishingGame,
         openModal: handleOpenModal,
         closeModal: handleCloseModal,
+        setEnemies: handleEnemies,
       }}
     >
       {children}

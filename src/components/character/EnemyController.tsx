@@ -64,6 +64,7 @@ export const EnemyController = ({
         lockRotations
         ref={rb}
         position={new Vector3(x, y, z)}
+        type="fixed"
       >
         <group ref={container}>
           <group ref={character}>

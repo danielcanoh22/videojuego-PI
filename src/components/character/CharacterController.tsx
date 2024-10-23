@@ -14,7 +14,8 @@ import { useGame } from "../../context/GameContext";
 import Bullet from "./Bullet";
 
 export const CharacterController = () => {
-  const { openPhishingGame, isActivePhishing } = useGame();
+  const { openPhishingGame, isActivePhishing, enemies, openModal, showModal } =
+    useGame();
 
   const rb = useRef<RapierRigidBody | null>(null);
   const container = useRef<Group | null>(null);
@@ -69,6 +70,35 @@ export const CharacterController = () => {
 
         setAnimation("idle");
       }
+    }
+  });
+
+  useFrame(() => {
+    if (rb.current) {
+      const playerPosition = rb.current.translation();
+
+      enemies.forEach((enemy) => {
+        // const enemyPosition = new Vector3(enemy.x, enemy.y, enemy.z); // Crear un vector con la posición del enemigo
+        // const distance = playerPosition.distanceTo(enemyPosition);
+        // console.log(enemy);
+
+        const distance = Math.sqrt(
+          (playerPosition.x - enemy.x) ** 2 +
+            (playerPosition.y - enemy.y) ** 2 +
+            (playerPosition.z - enemy.z) ** 2
+        );
+
+        // console.log(distance);
+
+        const proximityThreshold = 0.6; // Umbral de proximidad para activar el modal
+
+        if (distance < proximityThreshold && !showModal) {
+          // setIsModalVisible(true);
+          // setCurrentEnemy(enemy); // Guardar el enemigo con el que estamos interactuando
+          console.log("Tocaste a un enemigo!!!!");
+          openModal();
+        }
+      });
     }
   });
 
