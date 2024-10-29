@@ -5,6 +5,7 @@ export default {
     extend: {
       backgroundImage: {
         minigameBackground: "url('/assets/img/phishing/bg-phishing2.png')",
+        videogameBackground: "url('/assets/img/bg-game.png')",
       },
     },
   },

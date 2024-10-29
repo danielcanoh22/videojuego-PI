@@ -6,6 +6,7 @@ import { PhishingGame } from "./components/minigames/phishing/PhishingGame";
 
 import "@fontsource-variable/exo-2";
 import { TrojanWindow } from "./components/minigames/trojan/components/TrojanWindow";
+import { HomeScreen } from "./components/common/HomeScreen";
 
 const keyboardMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -17,27 +18,27 @@ const keyboardMap = [
 ];
 
 function App() {
-  const { showPhishingGame, showModal } = useGame();
+  const { showHomeScreen, showPhishingGame, showModal } = useGame();
 
   return (
     <>
+      {showHomeScreen && <HomeScreen />}
+
       <KeyboardControls map={keyboardMap}>
         <Canvas shadows camera={{ position: [3, 3, 3], near: 0.1, fov: 40 }}>
           <color attach="background" args={["#ececec"]} />
           <Experience />
         </Canvas>
       </KeyboardControls>
+
       {showPhishingGame && <PhishingGame />}
 
       {showModal && <TrojanWindow />}
 
-      {/* <PhishingGame /> */}
-      {showPhishingGame && (
-        <div className="w-full h-full bg-black/50 fixed top-0 left-0 z-10"></div>
-      )}
-      {/* <DndProvider backend={HTML5Backend}>
-        <Smishing />
-      </DndProvider> */}
+      {showPhishingGame ||
+        (showModal && (
+          <div className="w-full h-full bg-black/50 fixed top-0 left-0 z-10"></div>
+        ))}
     </>
   );
 }

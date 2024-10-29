@@ -7,17 +7,18 @@ import {
 import { useRef, useState } from "react";
 import { Group, Vector3 } from "three";
 import { Enemy } from "./Enemy";
+import { Enemy as EnemyType } from "../../types";
 
-interface Coordinates {
-  x: number;
-  y: number;
-  z: number;
-}
+// interface Coordinates {
+//   x: number;
+//   y: number;
+//   z: number;
+// }
 
 export const EnemyController = ({
   coordinates,
 }: {
-  coordinates: Coordinates;
+  coordinates: EnemyType;
 }) => {
   const { x, y, z } = coordinates;
   const rb = useRef<RapierRigidBody | null>(null);

@@ -14,13 +14,13 @@ const maps: Record<
   string,
   { scale: number; position: [number, number, number] }
 > = {
-  map: {
+  map2: {
     scale: 0.4,
     position: [-9, -6.2, -1],
   },
 };
 
-const MAP_NAME = "map";
+const MAP_NAME = "map2";
 
 export const Experience = () => {
   const shadowCameraRef = useRef<ThreeOrthographicCamera>(null);

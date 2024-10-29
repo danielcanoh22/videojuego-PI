@@ -11,11 +11,17 @@ import { Character } from "./Character";
 import { lerpAngle } from "../../utils/utils";
 import { ROTATION_SPEED, RUN_SPEED, WALK_SPEED } from "../../utils/constants";
 import { useGame } from "../../context/GameContext";
-
+import { Enemy } from "../../types";
 
 export const CharacterController = () => {
-  const { openPhishingGame, isActivePhishing, enemies, openModal, showModal } =
-    useGame();
+  const {
+    openPhishingGame,
+    isActiveGame,
+    enemies,
+    openModal,
+    showModal,
+    setClosestEnemy,
+  } = useGame();
 
   const rb = useRef<RapierRigidBody | null>(null);
   const container = useRef<Group | null>(null);
@@ -31,7 +37,6 @@ export const CharacterController = () => {
   const cameraLookAtWorldPosition = useRef<Vector3>(new Vector3());
   const cameraLookAt = useRef<Vector3>(new Vector3());
   const [, get] = useKeyboardControls();
-
 
   // Coordenada objetivo
   // const targetPosition2 = { x: -15.21, y: -6.00, z: 0.35 };
@@ -73,26 +78,17 @@ export const CharacterController = () => {
   useFrame(() => {
     if (rb.current) {
       const playerPosition = rb.current.translation();
-
       enemies.forEach((enemy) => {
-        // const enemyPosition = new Vector3(enemy.x, enemy.y, enemy.z); // Crear un vector con la posición del enemigo
-        // const distance = playerPosition.distanceTo(enemyPosition);
-        // console.log(enemy);
-
         const distance = Math.sqrt(
           (playerPosition.x - enemy.x) ** 2 +
             (playerPosition.y - enemy.y) ** 2 +
             (playerPosition.z - enemy.z) ** 2
         );
 
-        // console.log(distance);
-
         const proximityThreshold = 0.6; // Umbral de proximidad para activar el modal
 
         if (distance < proximityThreshold && !showModal) {
-          // setIsModalVisible(true);
-          // setCurrentEnemy(enemy); // Guardar el enemigo con el que estamos interactuando
-          console.log("Tocaste a un enemigo!!!!");
+          setClosestEnemy(enemy);
           openModal();
         }
       });
@@ -100,7 +96,7 @@ export const CharacterController = () => {
   });
 
   useFrame(({ camera }) => {
-    if (!isActivePhishing) {
+    if (!isActiveGame) {
       // Personaje
       if (rb.current) {
         const vel = rb.current.linvel();
@@ -172,7 +168,6 @@ export const CharacterController = () => {
 
       camera.lookAt(cameraLookAt.current);
     }
-
   });
   // -0.1
   return (
@@ -190,7 +185,6 @@ export const CharacterController = () => {
 
       {/* Mostrar modal si el personaje está cerca de la coordenada */}
       {/* {showModal && <Modal onClose={() => setShowModal(false)} />} */}
-
     </>
   );
 };

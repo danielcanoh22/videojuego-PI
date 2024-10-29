@@ -1,57 +1,102 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 //DATOS GLOBALES --
+import enemyPositions from "../components/minigames/trojan/enemyPositions.json";
+import { Coordinates, Enemy } from "../types";
+import { getUniqueRandomPositions } from "../utils";
+
+const positions: Coordinates[] = enemyPositions;
 
 interface GameContext {
+  showHomeScreen: boolean;
+  setHomeScreen: () => void;
   showModal: boolean;
   showPhishingGame: boolean;
-  isActivePhishing: boolean;
+  isActiveGame: boolean;
   enemies: object[];
+  closestEnemy: Enemy;
+  setClosestEnemy: (enemy: Enemy) => void;
   openPhishingGame: () => void;
   closePhishingGame: () => void;
   openModal: () => void;
   closeModal: () => void;
-  setEnemies: (positions: object[]) => void;
+  setEnemies: (positions: Enemy[]) => void;
+  removeEnemy: (coordinates: Enemy) => void;
 }
 
 const GameContext = createContext<GameContext | undefined>(undefined);
 
 const GameProvider = ({ children }: { children: ReactNode }) => {
+  const [showHomeScreen, setShowHomeScreen] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
-  const [isActivePhishing, setIsActivePhishing] = useState(false);
+  const [isActiveGame, setIsActiveGame] = useState(false);
   const [showPhishingGame, setShowPhishingGame] = useState(false);
 
-  const [enemies, setEnemies] = useState<object[]>([{}]);
+  const [enemies, setEnemies] = useState<Enemy[]>(() =>
+    getUniqueRandomPositions(3, positions)
+  );
+
+  const [closestEnemy, setClosestEnemy] = useState({ id: 0, x: 0, y: 0, z: 0 });
+
+  const handleCloseHomeScreen = () => {
+    setShowHomeScreen(false);
+  };
+
+  const handleRemoveEnemy = (enemyCoordinates: Enemy) => {
+    setEnemies((prevEnemies) => {
+      const updatedEnemies = prevEnemies.filter(
+        (enemy) =>
+          !(
+            enemy.x === enemyCoordinates.x &&
+            enemy.y === enemyCoordinates.y &&
+            enemy.z === enemyCoordinates.z
+          )
+      );
+
+      return updatedEnemies;
+    });
+  };
+
+  const handleClosestEnemy = (enemy: Enemy) => {
+    setClosestEnemy(enemy);
+  };
 
   const handleOpenModal = () => {
     setShowModal(true);
+    setIsActiveGame(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setIsActiveGame(false);
   };
 
   const handleOpenPhishingGame = () => {
     setShowPhishingGame(true);
-    setIsActivePhishing(true);
+    setIsActiveGame(true);
   };
 
   const handleClosePhishingGame = () => {
     setShowPhishingGame(false);
-    setIsActivePhishing(false);
+    setIsActiveGame(false);
   };
 
-  const handleEnemies = (positions: object[]) => {
+  const handleEnemies = (positions: Enemy[]) => {
     setEnemies(positions);
   };
 
   return (
     <GameContext.Provider
       value={{
+        showHomeScreen,
+        setHomeScreen: handleCloseHomeScreen,
         showModal,
         showPhishingGame,
-        isActivePhishing,
+        isActiveGame,
         enemies,
+        closestEnemy,
+        setClosestEnemy: handleClosestEnemy,
+        removeEnemy: handleRemoveEnemy,
         openPhishingGame: handleOpenPhishingGame,
         closePhishingGame: handleClosePhishingGame,
         openModal: handleOpenModal,
