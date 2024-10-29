@@ -7,6 +7,7 @@ export const TrojanWindow = () => {
   const { closeModal } = useGame();
 
 
+
   const getRandomQuestion = () => {
     const randomIndex = Math.floor(Math.random() * ansOption.length);
     return ansOption[randomIndex];
@@ -15,18 +16,27 @@ export const TrojanWindow = () => {
   const [currentQuestion]= useState(getRandomQuestion());
   const [selectedAnswer, setSelectedAnswer] = useState <number | null >(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [score, setScore] = useState(0);
 
+  
   const handleAnswer = (index: number) => {
     setSelectedAnswer(index);
-    setIsCorrect(index === currentQuestion.correct);
+    const correct = index === currentQuestion.correct;
+    setIsCorrect(correct);
+    const pointsEarned = correct ? 25 : -10;
+    setScore(prevScore => prevScore + pointsEarned);
   };
+
+ 
+
+
 
   return (
     <div className="w-[680px] h-[240px] bg-black fixed top-1/4 right-[100px] -translate-y-1/2 rounded-md text-white text-[25px]">
     <div>
       <div className="w-full h-80 bg-[rgb(128,128,255)] rounded-lg flex flex-col items-center justify-center">
         <button
-          className="text-4xl text-white border-2 border-white p-2 absolute top-4 right-4"
+          className="text-4xl text-white absolute top-4 right-8"
           onClick={() => closeModal()}
         >
           x
@@ -60,6 +70,7 @@ export const TrojanWindow = () => {
         <div className="w-32 h-10 bg-yellow-300 ml-2"></div>
         <div className="w-full h-10 bg-[rgb(255,0,255)] flex justify-center items-center"></div>
       </div>
+      <div className="text-[30px] text-center font-bold">Puntos: {score}</div>
     </div>
   </div>
 
