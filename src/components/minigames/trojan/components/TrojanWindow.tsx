@@ -4,24 +4,27 @@ import { ansOption } from "./options";
 import { useState } from "react";
 
 export const TrojanWindow = () => {
-  const { closeModal, removeEnemy, closestEnemy } = useGame();
+  const { closeModal, removeEnemy, closestEnemy, trojanScore, setTrojanScore } =
+    useGame();
 
   const currentQuestion = ansOption.find(
     (question) => question.id === closestEnemy.id
   );
   const [selectedOption, setSelectedOption] = useState<null | number>(null);
   const [isCorrect, setIsCorrect] = useState<null | boolean>(null);
-  const [score, setScore] = useState(0);
 
   const handleAnswer = (index: number) => {
+    if (isCorrect) return;
+
     setSelectedOption(index);
     const correct = index === currentQuestion.correct;
     setIsCorrect(correct);
+
     const pointsEarned = correct ? 25 : -10;
-    setScore((prevScore) => prevScore + pointsEarned);
+    setTrojanScore(pointsEarned);
 
     if (correct) {
-      removeEnemy(currentQuestion.coordinates); // Elimina el enemigo si es correcto
+      removeEnemy(currentQuestion.coordinates);
       // closeModal();
     }
   };
@@ -60,16 +63,24 @@ export const TrojanWindow = () => {
 
         {selectedOption !== null && (
           <div className="mt-4 text-center">
-            {isCorrect ? "Sabe cositas 🫦" : "Que estan viendo mis ojos 🤺🤺🤺"}
+            {isCorrect
+              ? "¡Respuesta correcta!"
+              : "Respuesta incorrecta. Inténtalo nuevamente."}
           </div>
         )}
 
-        <div className="flex flex-row items-center mt-4">
+        <div className="flex gap-4 items-center mt-4">
           <img src={Star} alt="Point's star" className="w-[80px] h-[80px]" />
-          <div className="w-32 h-10 bg-yellow-300 ml-2"></div>
-          <div className="w-full h-10 bg-[rgb(255,0,255)] flex justify-center items-center"></div>
+          <div className="w-full h-10 bg-[rgb(255,0,255)]">
+            <div
+              className="h-10 bg-yellow-300"
+              style={{ width: `${trojanScore}%` }}
+            ></div>
+          </div>
         </div>
-        <div className="text-[30px] text-center font-bold">Puntos: {score}</div>
+        <div className="text-[30px] text-center font-bold">
+          Puntos: {trojanScore}
+        </div>
       </div>
     </div>
   );

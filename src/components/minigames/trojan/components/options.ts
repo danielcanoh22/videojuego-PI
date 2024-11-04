@@ -51,7 +51,7 @@ export const ansOption: Question[] = [
     question: "¿Qué es el phishing?",
     options: [
       "Un método para proteger contraseñas.",
-      "Un tipo de ataque que engaña a las personas para qusae revelen información sensible.",
+      "Un tipo de ataque que engaña a las personas para que revelen información sensible.",
       "Un virus que afecta el correo electrónico.",
       "Una técnica de encriptación.",
     ],

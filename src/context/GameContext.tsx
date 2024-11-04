@@ -25,13 +25,15 @@ interface GameContext {
   isActiveTrojanGame: boolean;
   enemies: object[];
   closestEnemy: Enemy;
+  trojanScore: number;
+  setTrojanScore: (score: number) => void;
   setClosestEnemy: (enemy: Enemy) => void;
   openPhishingGame: () => void;
   closePhishingGame: () => void;
   activeTrojanGame: () => void;
   openModal: () => void;
   closeModal: () => void;
-  setEnemies: (positions: Enemy[]) => void;
+  setEnemies: () => void;
   removeEnemy: (coordinates: Enemy) => void;
 }
 
@@ -49,10 +51,11 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
   const [showHomeTrojan, setShowHomeTrojan] = useState(false);
   const [showPhishingGame, setShowPhishingGame] = useState(false);
 
-  const [enemies, setEnemies] = useState<Enemy[]>(() =>
-    getUniqueRandomPositions(5, positions)
-  );
-
+  // const [enemies, setEnemies] = useState<Enemy[]>(() =>
+  //   getUniqueRandomPositions(5, positions)
+  // );
+  const [enemies, setEnemies] = useState<Enemy[]>([]);
+  const [trojanScore, setTrojanScore] = useState(0);
   const [closestEnemy, setClosestEnemy] = useState({ id: 0, x: 0, y: 0, z: 0 });
 
   const handleCloseHomeScreen = () => {
@@ -115,8 +118,8 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     setIsActiveGame(false);
   };
 
-  const handleEnemies = (positions: Enemy[]) => {
-    setEnemies(positions);
+  const handleEnemies = () => {
+    setEnemies(getUniqueRandomPositions(5, positions));
   };
 
   const handleTrojanGame = () => {
@@ -131,6 +134,12 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
   const handleCloseHomeTrojan = () => {
     setShowHomeTrojan(false);
     setIsActiveGame(false);
+  };
+
+  const handleTrojanScore = (sc: number) => {
+    if (trojanScore + sc < 0) setTrojanScore(0);
+    else if (trojanScore + sc > 100) setTrojanScore(100);
+    else setTrojanScore((prevScore: number) => prevScore + sc);
   };
 
   return (
@@ -154,6 +163,8 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
         closeHomeTrojan: handleCloseHomeTrojan,
         activeTrojanGame: handleTrojanGame,
         enemies,
+        trojanScore,
+        setTrojanScore: handleTrojanScore,
         closestEnemy,
         setClosestEnemy: handleClosestEnemy,
         removeEnemy: handleRemoveEnemy,

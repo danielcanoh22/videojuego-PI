@@ -11,20 +11,19 @@ import { Character } from "./Character";
 import { lerpAngle } from "../../utils/utils";
 import { ROTATION_SPEED, RUN_SPEED, WALK_SPEED } from "../../utils/constants";
 import { useGame } from "../../context/GameContext";
-import { Enemy } from "../../types";
 
 export const CharacterController = () => {
   const {
     openPhishingGame,
     isActiveGame,
     enemies,
+    setEnemies,
     openModal,
     showModal,
     setClosestEnemy,
     activeTrojanGame,
     isActiveTrojanGame,
     openHomeTrojan,
-    showHomeTrojan,
   } = useGame();
 
   const rb = useRef<RapierRigidBody | null>(null);
@@ -93,6 +92,7 @@ export const CharacterController = () => {
       if (distanceTrojan < proximityThresholdTrojan && !isActiveTrojanGame) {
         openHomeTrojan();
         activeTrojanGame();
+        setEnemies();
       }
     }
   });
