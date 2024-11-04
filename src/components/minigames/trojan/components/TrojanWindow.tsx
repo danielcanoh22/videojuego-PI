@@ -6,12 +6,6 @@ import { useState } from "react";
 export const TrojanWindow = () => {
   const { closeModal, removeEnemy, closestEnemy } = useGame();
 
-  const getRandomQuestion = () => {
-    const randomIndex = Math.floor(Math.random() * ansOption.length);
-    return ansOption[randomIndex];
-  };
-
-  // const [currentQuestion] = useState(getRandomQuestion());
   const currentQuestion = ansOption.find(
     (question) => question.id === closestEnemy.id
   );

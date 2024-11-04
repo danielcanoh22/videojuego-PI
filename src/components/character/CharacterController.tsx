@@ -21,6 +21,10 @@ export const CharacterController = () => {
     openModal,
     showModal,
     setClosestEnemy,
+    activeTrojanGame,
+    isActiveTrojanGame,
+    openHomeTrojan,
+    showHomeTrojan,
   } = useGame();
 
   const rb = useRef<RapierRigidBody | null>(null);
@@ -44,6 +48,13 @@ export const CharacterController = () => {
   const proximityThreshold = 0.6; // Definir un umbral de cercanía
   const newSafePosition = { x: -8.56, y: -6.13, z: 2.66 };
 
+  const proximityThresholdTrojan = 1; // Definir un umbral de cercanía
+  const targetPositionTrojan = {
+    x: -16.91,
+    y: -5.08,
+    z: -11.99,
+  };
+
   useFrame(() => {
     if (rb.current) {
       const pos = rb.current.translation();
@@ -60,6 +71,12 @@ export const CharacterController = () => {
           (pos.z - targetPosition.z) ** 2
       );
 
+      const distanceTrojan = Math.sqrt(
+        (pos.x - targetPositionTrojan.x) ** 2 +
+          (pos.y - targetPositionTrojan.y) ** 2 +
+          (pos.z - targetPositionTrojan.z) ** 2
+      );
+
       // Si está lo suficientemente cerca, mostrar el modal
       if (distance < proximityThreshold) {
         openPhishingGame();
@@ -71,6 +88,11 @@ export const CharacterController = () => {
         );
 
         setAnimation("idle");
+      }
+
+      if (distanceTrojan < proximityThresholdTrojan && !isActiveTrojanGame) {
+        openHomeTrojan();
+        activeTrojanGame();
       }
     }
   });

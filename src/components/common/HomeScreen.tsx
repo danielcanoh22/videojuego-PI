@@ -3,7 +3,7 @@ import { GameImage } from "../minigames/phishing/components/common";
 import { HomeScreenButton } from "./HomeScreenButton";
 
 export const HomeScreen = () => {
-  const { setHomeScreen } = useGame();
+  const { setHomeScreen, openCreditsScreen } = useGame();
 
   return (
     <div className="fixed top-0 left-0 bg-blue-200 w-screen h-screen z-[100] text-white flex flex-col items-center justify-end gap-20 pb-52">
@@ -17,7 +17,9 @@ export const HomeScreen = () => {
         <HomeScreenButton onClick={setHomeScreen}>
           Iniciar juego
         </HomeScreenButton>
-        <HomeScreenButton>Créditos</HomeScreenButton>
+        <HomeScreenButton onClick={openCreditsScreen}>
+          Créditos
+        </HomeScreenButton>
       </div>
     </div>
   );

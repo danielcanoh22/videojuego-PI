@@ -1,4 +1,3 @@
-import { useFrame } from "@react-three/fiber";
 import {
   CapsuleCollider,
   RapierRigidBody,
@@ -8,12 +7,6 @@ import { useRef, useState } from "react";
 import { Group, Vector3 } from "three";
 import { Enemy } from "./Enemy";
 import { Enemy as EnemyType } from "../../types";
-
-// interface Coordinates {
-//   x: number;
-//   y: number;
-//   z: number;
-// }
 
 export const EnemyController = ({
   coordinates,
@@ -26,37 +19,6 @@ export const EnemyController = ({
   const character = useRef<Group | null>(null);
 
   const [animation, setAnimation] = useState("idle");
-
-  // useFrame(() => {
-  //   if (rb.current) {
-  //     const pos = rb.current.translation();
-  //         // console.log({
-  //         //   x: pos.x.toFixed(2),
-  //         //   y: pos.y.toFixed(2),
-  //         //   z: pos.z.toFixed(2),
-  //         // });
-
-  //     // Calcular distancia entre el personaje y la coordenada objetivo
-  //     // const distance = Math.sqrt(
-  //     //   (pos.x - x) ** 2 +
-  //     //     (pos.y - y) ** 2 +
-  //     //     (pos.z - z) ** 2
-  //     // );
-
-  //     // Si está lo suficientemente cerca, mostrar el modal
-  //     //if (distance < proximityThreshold) {
-  //     //  openPhishingGame();
-
-  //       // Mover al personaje a la nueva ubicación segura
-  //    //   rb.current.setTranslation(
-  //    //     { x: newSafePosition.x, y: newSafePosition.y, z: newSafePosition.z },
-  //    //     true
-  //    //   );
-
-  //    //   setAnimation("idle");
-  //    // }
-  //   }
-  // });
 
   return (
     <>

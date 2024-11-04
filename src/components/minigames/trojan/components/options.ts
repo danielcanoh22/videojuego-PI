@@ -22,9 +22,10 @@ export const ansOption: Question[] = [
     correct: 0,
     isAnswered: false,
     coordinates: {
-      x: 0.28,
-      y: -6.12,
-      z: 5.97,
+      id: 1,
+      x: -22.76,
+      y: -5.15,
+      z: -14.87,
     },
   },
   {
@@ -32,16 +33,17 @@ export const ansOption: Question[] = [
     question: "¿Cuál es la función de un firewall?",
     options: [
       "Proteger contra virus y malware.",
-      "Filtrar el tráfico de red y controlar el acceso.",
       "Monitorear el uso de la red.",
+      "Filtrar el tráfico de red y controlar el acceso.",
       "Almacenar datos de forma segura.",
     ],
-    correct: 1,
+    correct: 2,
     isAnswered: false,
     coordinates: {
-      x: 0.13,
-      y: -6.11,
-      z: 2.92,
+      id: 2,
+      x: -11.78,
+      y: -6.12,
+      z: -9.55,
     },
   },
   {
@@ -49,33 +51,59 @@ export const ansOption: Question[] = [
     question: "¿Qué es el phishing?",
     options: [
       "Un método para proteger contraseñas.",
-      "Un tipo de ataque que engaña a las personas para que revelen información sensible.",
+      "Un tipo de ataque que engaña a las personas para qusae revelen información sensible.",
       "Un virus que afecta el correo electrónico.",
       "Una técnica de encriptación.",
     ],
     correct: 1,
     isAnswered: false,
     coordinates: {
-      x: -0.98,
+      id: 3,
+      x: -8.26,
       y: -6.12,
-      z: 5.06,
+      z: -14.01,
+    },
+  },
+  {
+    id: 4,
+    question: "¿Qué es el malware?",
+    options: [
+      "Software antivirus.",
+      "Un tipo de sistema operativo.",
+      "Un método de autenticación.",
+      "Software diseñado para dañar o infiltrarse en sistemas.",
+    ],
+    correct: 3,
+    isAnswered: false,
+    coordinates: {
+      id: 4,
+      x: 4.36,
+      y: -6.12,
+      z: -14.35,
+    },
+  },
+  {
+    id: 5,
+    question: "¿Qué es un certificado SSL?",
+    options: [
+      "Un protocolo para la transferencia de datos.",
+      "Un documento que garantiza la privacidad en la red.",
+      "Un tipo de malware.",
+      "Una forma de autenticación de dos factores.",
+    ],
+    correct: 1,
+    isAnswered: false,
+    coordinates: {
+      id: 5,
+      x: -8.12,
+      y: -6.12,
+      z: -4.5,
     },
   },
 ];
 
 export default ansOption;
 
-// {
-//   id: 4,
-//   question: "¿Qué es el malware?",
-//   options: [
-//     "Software diseñado para dañar o infiltrarse en sistemas.",
-//     "Software antivirus.",
-//     "Un tipo de sistema operativo.",
-//     "Un método de autenticación.",
-//   ],
-//   correct: 0,
-// },
 // {
 //   id: 5,
 //   question: "¿Qué es un certificado SSL?",
@@ -142,3 +170,24 @@ export default ansOption;
 //   ],
 //   correct: 0,
 // },
+
+// [
+//   {
+//     id: 1,
+//     x: -22.76,
+//     y: -5.15,
+//     z: -14.87,
+//   },
+//   {
+//     id: 2,
+//     x: -11.78,
+//     y: -6.12,
+//     z: -9.55,
+//   },
+//   {
+//     id: 3,
+//     x: -8.26,
+//     y: -6.12,
+//     z: -14.01,
+//   },
+// ];

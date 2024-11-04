@@ -7,6 +7,10 @@ import { PhishingGame } from "./components/minigames/phishing/PhishingGame";
 import "@fontsource-variable/exo-2";
 import { TrojanWindow } from "./components/minigames/trojan/components/TrojanWindow";
 import { HomeScreen } from "./components/common/HomeScreen";
+import { HomeTutorial } from "./components/common/HomeTutorial";
+import { HomeControls } from "./components/common/HomeControls";
+import { CreditsScreen } from "./components/common/CreditsScreen";
+import { TrojanHomeScreen } from "./components/minigames/trojan/components/TrojanHomeScreen";
 
 const keyboardMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -14,15 +18,33 @@ const keyboardMap = [
   { name: "left", keys: ["ArrowLeft", "KeyA"] },
   { name: "right", keys: ["ArrowRight", "KeyD"] },
   { name: "run", keys: ["Shift"] },
-  { name: "shoot", keys: ["Space"] },
 ];
 
 function App() {
-  const { showHomeScreen, showPhishingGame, showModal } = useGame();
+  const {
+    showHomeScreen,
+    showPhishingGame,
+    showModal,
+    showHomeTutorial,
+    showHomeControls,
+    showCreditsScreen,
+    showHomeTrojan,
+  } = useGame();
+
+  const showOverlay =
+    showPhishingGame || showModal || showHomeTutorial || showHomeTrojan;
 
   return (
     <>
       {showHomeScreen && <HomeScreen />}
+
+      {showCreditsScreen && <CreditsScreen />}
+
+      {showHomeTutorial && <HomeTutorial />}
+
+      {showHomeControls && <HomeControls />}
+
+      {showHomeTrojan && <TrojanHomeScreen />}
 
       <KeyboardControls map={keyboardMap}>
         <Canvas shadows camera={{ position: [3, 3, 3], near: 0.1, fov: 40 }}>
@@ -35,10 +57,9 @@ function App() {
 
       {showModal && <TrojanWindow />}
 
-      {showPhishingGame ||
-        (showModal && (
-          <div className="w-full h-full bg-black/50 fixed top-0 left-0 z-10"></div>
-        ))}
+      {showOverlay && (
+        <div className="w-full h-full bg-black/50 fixed top-0 left-0 z-10"></div>
+      )}
     </>
   );
 }

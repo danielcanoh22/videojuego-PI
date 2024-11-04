@@ -9,14 +9,26 @@ const positions: Coordinates[] = enemyPositions;
 interface GameContext {
   showHomeScreen: boolean;
   setHomeScreen: () => void;
+  showCreditsScreen: boolean;
+  openCreditsScreen: () => void;
+  closeCreditsScreen: () => void;
+  showHomeTutorial: boolean;
+  setHomeTutorial: () => void;
+  showHomeControls: boolean;
+  setHomeControls: () => void;
   showModal: boolean;
   showPhishingGame: boolean;
   isActiveGame: boolean;
+  showHomeTrojan: boolean;
+  openHomeTrojan: () => void;
+  closeHomeTrojan: () => void;
+  isActiveTrojanGame: boolean;
   enemies: object[];
   closestEnemy: Enemy;
   setClosestEnemy: (enemy: Enemy) => void;
   openPhishingGame: () => void;
   closePhishingGame: () => void;
+  activeTrojanGame: () => void;
   openModal: () => void;
   closeModal: () => void;
   setEnemies: (positions: Enemy[]) => void;
@@ -27,19 +39,41 @@ const GameContext = createContext<GameContext | undefined>(undefined);
 
 const GameProvider = ({ children }: { children: ReactNode }) => {
   const [showHomeScreen, setShowHomeScreen] = useState(true);
+  const [showCreditsScreen, setShowCreditsScreen] = useState(false);
+  const [showHomeTutorial, setShowHomeTutorial] = useState(true);
+  const [showHomeControls, setShowHomeControls] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
-  const [isActiveGame, setIsActiveGame] = useState(false);
+  const [isActiveGame, setIsActiveGame] = useState(true);
+  const [isActiveTrojanGame, setIsActiveTrojanGame] = useState(false);
+  const [showHomeTrojan, setShowHomeTrojan] = useState(false);
   const [showPhishingGame, setShowPhishingGame] = useState(false);
 
   const [enemies, setEnemies] = useState<Enemy[]>(() =>
-    getUniqueRandomPositions(3, positions)
+    getUniqueRandomPositions(5, positions)
   );
 
   const [closestEnemy, setClosestEnemy] = useState({ id: 0, x: 0, y: 0, z: 0 });
 
   const handleCloseHomeScreen = () => {
     setShowHomeScreen(false);
+  };
+
+  const handleOpenCreditsScreen = () => {
+    setShowCreditsScreen(true);
+  };
+
+  const handleCloseCreditsScreen = () => {
+    setShowCreditsScreen(false);
+  };
+
+  const handleCloseHomeTutorial = () => {
+    setShowHomeTutorial(false);
+    setIsActiveGame(false);
+  };
+
+  const handleCloseHomeControls = () => {
+    setShowHomeControls(false);
   };
 
   const handleRemoveEnemy = (enemyCoordinates: Enemy) => {
@@ -85,14 +119,40 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     setEnemies(positions);
   };
 
+  const handleTrojanGame = () => {
+    setIsActiveTrojanGame(true);
+  };
+
+  const handleOpenHomeTrojan = () => {
+    setShowHomeTrojan(true);
+    setIsActiveGame(true);
+  };
+
+  const handleCloseHomeTrojan = () => {
+    setShowHomeTrojan(false);
+    setIsActiveGame(false);
+  };
+
   return (
     <GameContext.Provider
       value={{
         showHomeScreen,
         setHomeScreen: handleCloseHomeScreen,
+        showCreditsScreen,
+        openCreditsScreen: handleOpenCreditsScreen,
+        closeCreditsScreen: handleCloseCreditsScreen,
+        showHomeTutorial,
+        setHomeTutorial: handleCloseHomeTutorial,
+        showHomeControls,
+        setHomeControls: handleCloseHomeControls,
         showModal,
         showPhishingGame,
         isActiveGame,
+        isActiveTrojanGame,
+        showHomeTrojan,
+        openHomeTrojan: handleOpenHomeTrojan,
+        closeHomeTrojan: handleCloseHomeTrojan,
+        activeTrojanGame: handleTrojanGame,
         enemies,
         closestEnemy,
         setClosestEnemy: handleClosestEnemy,
