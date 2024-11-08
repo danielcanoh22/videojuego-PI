@@ -25,7 +25,9 @@ export const TrojanWindow = () => {
 
     if (correct) {
       removeEnemy(currentQuestion.coordinates);
-      // closeModal();
+      setTimeout(() =>{
+        closeModal()
+      },1000)
     }
   };
 
@@ -80,6 +82,7 @@ export const TrojanWindow = () => {
         </div>
         <div className="text-[30px] text-center font-bold">
           Puntos: {trojanScore}
+      
         </div>
       </div>
     </div>

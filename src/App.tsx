@@ -11,6 +11,7 @@ import { HomeTutorial } from "./components/common/HomeTutorial";
 import { HomeControls } from "./components/common/HomeControls";
 import { CreditsScreen } from "./components/common/CreditsScreen";
 import { TrojanHomeScreen } from "./components/minigames/trojan/components/TrojanHomeScreen";
+import { WinningScreen } from "./components/minigames/trojan/components/WinningScreen";
 
 const keyboardMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -29,10 +30,11 @@ function App() {
     showHomeControls,
     showCreditsScreen,
     showHomeTrojan,
+    showWinningScreen,
   } = useGame();
 
   const showOverlay =
-    showPhishingGame || showModal || showHomeTutorial || showHomeTrojan;
+    showPhishingGame || showModal || showHomeTutorial || showHomeTrojan || showWinningScreen;
 
   return (
     <>
@@ -45,6 +47,8 @@ function App() {
       {showHomeControls && <HomeControls />}
 
       {showHomeTrojan && <TrojanHomeScreen />}
+      
+      {showWinningScreen && <WinningScreen/>}
 
       <KeyboardControls map={keyboardMap}>
         <Canvas shadows camera={{ position: [3, 3, 3], near: 0.1, fov: 40 }}>
