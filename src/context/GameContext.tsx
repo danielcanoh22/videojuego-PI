@@ -156,7 +156,8 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     if (trojanScore + sc < 0) setTrojanScore(0);
     else if (trojanScore + sc > 100) setTrojanScore(100);
     else setTrojanScore((prevScore: number) => prevScore + sc);
-    if (trojanScore+ sc == 100) {
+    if (trojanScore + sc == 100) {
+      setEnemies([]);
       setTimeout(() => {
         setWinningScreen(true)
       },2000)
