@@ -5,8 +5,11 @@ import { Welcome, Tutorial, GameContent, Feedback, GameOver } from "./screens";
 import { emailsData } from "./data";
 import { EmailElementType } from "../../../types";
 import { calcScore } from "../../../utils";
+import { useGame } from "../../../context/GameContext";
 
 export const PhishingGame = () => {
+  const { setWonPhishing } = useGame();
+
   const [screen, setScreen] = useState(0);
   const [positiveAnswer, setPositiveAnswer] = useState<boolean | null>(null);
   const [emailsIndex, setEmailsIndex] = useState(0);
@@ -72,6 +75,10 @@ export const PhishingGame = () => {
 
   const handleFinishGame = () => {
     setScreen(4);
+
+    setTimeout(() => {
+      setWonPhishing(true);
+    }, 2000);
   };
 
   useEffect(() => {

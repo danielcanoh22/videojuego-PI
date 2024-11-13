@@ -12,7 +12,7 @@ interface GameContext {
   showCreditsScreen: boolean;
   openCreditsScreen: () => void;
   closeCreditsScreen: () => void;
-  showHomeTutorial: boolean; 
+  showHomeTutorial: boolean;
   setHomeTutorial: () => void;
   showHomeControls: boolean;
   setHomeControls: () => void;
@@ -38,6 +38,10 @@ interface GameContext {
   closeModal: () => void;
   setEnemies: () => void;
   removeEnemy: (coordinates: Enemy) => void;
+
+  wonPhishing: boolean;
+  setWonPhishing: (value: boolean) => void;
+  wonTrojan: boolean;
 }
 
 const GameContext = createContext<GameContext | undefined>(undefined);
@@ -48,7 +52,6 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
   const [showHomeTutorial, setShowHomeTutorial] = useState(true);
   const [showHomeControls, setShowHomeControls] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  
 
   const [isActiveGame, setIsActiveGame] = useState(true);
   const [isActiveTrojanGame, setIsActiveTrojanGame] = useState(false);
@@ -56,12 +59,12 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
   const [showWinningScreen, setWinningScreen] = useState(false);
   const [showPhishingGame, setShowPhishingGame] = useState(false);
 
-  // const [enemies, setEnemies] = useState<Enemy[]>(() =>
-  //   getUniqueRandomPositions(5, positions)
-  // );
   const [enemies, setEnemies] = useState<Enemy[]>([]);
   const [trojanScore, setTrojanScore] = useState(0);
   const [closestEnemy, setClosestEnemy] = useState({ id: 0, x: 0, y: 0, z: 0 });
+
+  const [wonPhishing, setWonPhishing] = useState(false);
+  const [wonTrojan, setWonTrojan] = useState(false);
 
   const handleCloseHomeScreen = () => {
     setShowHomeScreen(false);
@@ -80,16 +83,13 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     setIsActiveGame(false);
   };
 
-
   const handleOpenWinningScreen = () => {
     setWinningScreen(true);
-  }
-
+  };
 
   const handleCloseWinningScreen = () => {
     setWinningScreen(false);
-  }
-
+  };
 
   const handleCloseHomeControls = () => {
     setShowHomeControls(false);
@@ -154,14 +154,19 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
 
   const handleTrojanScore = (sc: number) => {
     if (trojanScore + sc < 0) setTrojanScore(0);
-    else if (trojanScore + sc > 100) setTrojanScore(100);
-    else setTrojanScore((prevScore: number) => prevScore + sc);
-    if (trojanScore+ sc == 100) {
+    else if (trojanScore + sc >= 100) {
+      setTrojanScore(100);
+
       setTimeout(() => {
-        setWinningScreen(true)
-      },2000)
-      
-    }
+        setWinningScreen(true);
+        setWonTrojan(true);
+      }, 2000);
+    } else setTrojanScore((prevScore: number) => prevScore + sc);
+    // if (trojanScore + sc == 100) {
+    //   setTimeout(() => {
+    //     setWinningScreen(true);
+    //   }, 2000);
+    // }
   };
 
   return (
@@ -185,8 +190,8 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
         closeHomeTrojan: handleCloseHomeTrojan,
         activeTrojanGame: handleTrojanGame,
         showWinningScreen,
-        openWinningScreen : handleOpenWinningScreen,
-        closeWinningScreen : handleCloseWinningScreen,
+        openWinningScreen: handleOpenWinningScreen,
+        closeWinningScreen: handleCloseWinningScreen,
         enemies,
         trojanScore,
         setTrojanScore: handleTrojanScore,
@@ -198,6 +203,9 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
         openModal: handleOpenModal,
         closeModal: handleCloseModal,
         setEnemies: handleEnemies,
+        wonPhishing,
+        wonTrojan,
+        setWonPhishing,
       }}
     >
       {children}
