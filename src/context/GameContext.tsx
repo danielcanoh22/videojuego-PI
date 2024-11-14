@@ -89,6 +89,7 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
 
   const handleCloseWinningScreen = () => {
     setWinningScreen(false);
+    setIsActiveGame(false);
   };
 
   const handleCloseHomeControls = () => {
@@ -152,21 +153,24 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     setIsActiveGame(false);
   };
 
+  const resetTrojanGame = () => {
+    setIsActiveTrojanGame(false);
+    setTrojanScore(0);
+    setClosestEnemy({ id: 0, x: 0, y: 0, z: 0 });
+  };
+
   const handleTrojanScore = (sc: number) => {
     if (trojanScore + sc < 0) setTrojanScore(0);
     else if (trojanScore + sc >= 100) {
       setTrojanScore(100);
-
+      setEnemies([]);
       setTimeout(() => {
         setWinningScreen(true);
         setWonTrojan(true);
+        setIsActiveGame(true);
+        resetTrojanGame();
       }, 2000);
     } else setTrojanScore((prevScore: number) => prevScore + sc);
-    // if (trojanScore + sc == 100) {
-    //   setTimeout(() => {
-    //     setWinningScreen(true);
-    //   }, 2000);
-    // }
   };
 
   return (
