@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 //DATOS GLOBALES --
 import enemyPositions from "../components/minigames/trojan/enemyPositions.json";
 import { Coordinates, Enemy } from "../types";
@@ -96,6 +102,12 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     setShowHomeControls(false);
   };
 
+  const resetTrojanGame = () => {
+    setIsActiveTrojanGame(false);
+    setTrojanScore(0);
+    setClosestEnemy({ id: 0, x: 0, y: 0, z: 0 });
+  };
+
   const handleRemoveEnemy = (enemyCoordinates: Enemy) => {
     setEnemies((prevEnemies) => {
       const updatedEnemies = prevEnemies.filter(
@@ -153,12 +165,6 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     setIsActiveGame(false);
   };
 
-  const resetTrojanGame = () => {
-    setIsActiveTrojanGame(false);
-    setTrojanScore(0);
-    setClosestEnemy({ id: 0, x: 0, y: 0, z: 0 });
-  };
-
   const handleTrojanScore = (sc: number) => {
     if (trojanScore + sc < 0) setTrojanScore(0);
     else if (trojanScore + sc >= 100) {
@@ -172,6 +178,12 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
       }, 2000);
     } else setTrojanScore((prevScore: number) => prevScore + sc);
   };
+
+  useEffect(() => {
+    if (enemies.length === 0 && isActiveTrojanGame && !showModal) {
+      resetTrojanGame();
+    }
+  }, [enemies, isActiveTrojanGame, showModal]);
 
   return (
     <GameContext.Provider

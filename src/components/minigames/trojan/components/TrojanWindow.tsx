@@ -17,17 +17,23 @@ export const TrojanWindow = () => {
     if (isCorrect) return;
 
     setSelectedOption(index);
-    const correct = index === currentQuestion.correct;
+    const correct = index === currentQuestion?.correct;
     setIsCorrect(correct);
 
     const pointsEarned = correct ? 25 : -10;
     setTrojanScore(pointsEarned);
 
     if (correct) {
-      removeEnemy(currentQuestion.coordinates);
-      setTimeout(() =>{
-        closeModal()
-      },1000)
+      removeEnemy(currentQuestion?.coordinates);
+      setTimeout(() => {
+        closeModal();
+      }, 1000);
+
+      const audio = new Audio("/assets/sounds/correct.mp3");
+      audio.play();
+    } else {
+      const audio = new Audio("/assets/sounds/error.mp3");
+      audio.play();
     }
   };
 
@@ -41,11 +47,11 @@ export const TrojanWindow = () => {
           >
             x
           </button>
-          <div className="text-center text-md">{currentQuestion.question}</div>
+          <div className="text-center text-md">{currentQuestion?.question}</div>
         </div>
 
         <div className="grid grid-cols-2 gap-6 mt-4">
-          {currentQuestion.options.map((option, index) => (
+          {currentQuestion?.options.map((option, index) => (
             <div
               key={index}
               onClick={() => handleAnswer(index)}
@@ -82,7 +88,6 @@ export const TrojanWindow = () => {
         </div>
         <div className="text-[30px] text-center font-bold">
           Puntos: {trojanScore}
-      
         </div>
       </div>
     </div>
