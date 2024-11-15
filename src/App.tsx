@@ -48,6 +48,7 @@ function App() {
     const bgAudio = new Audio("/assets/sounds/fight.mp3");
     bgAudio.play();
     bgAudio.volume = 0.20;
+    bgAudio.loop = true;
     
   },[])
 
