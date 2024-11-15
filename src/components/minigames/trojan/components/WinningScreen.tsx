@@ -2,7 +2,7 @@ import { useGame } from "../../../../context/GameContext";
 import { HomeScreenButton } from "../../../common/HomeScreenButton";
 
 export const WinningScreen = () => {
-  const { closeWinningScreen } = useGame();
+  const { closeWinningScreen, accuracyRate } = useGame();
   return (
     <div className="flex flex-col items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-br from-blue-500 via-blue-400 to-blue-300 z-50 w-3/4 p-10 rounded-lg shadow-2xl overflow-hidden">
       <div className="w-full h-full bg-minigameBackground bg-cover opacity-20 fixed top-0 left-0"></div>
@@ -12,7 +12,21 @@ export const WinningScreen = () => {
         </h2>
         <div className="bg-white bg-opacity-90 p-6 rounded-md shadow-md mx-auto w-3/4">
           <p className="text-3xl font-medium text-gray-800 leading-relaxed">
-            Demostraste tener buena intuición. ¡Buen trabajo!
+            <div 
+              className={`
+                ${accuracyRate < 50 ? "text-red-500" : ""}
+                ${accuracyRate >= 50 && accuracyRate < 80 ? "text-yellow-500" : ""}
+                ${accuracyRate >= 80 ? "text-green-500" : ""}
+                font-semibold p-4 rounded-md transition-all duration-300 ease-in-out
+              `}
+            >
+              {accuracyRate < 50 
+                ? "¡No te rindas! Cada intento te acerca más a la meta. ¡Sigue intentándolo!" 
+                : accuracyRate < 80 
+                  ? "¡Vas bien! ¡Sigue así, estás cada vez más cerca de lograrlo!" 
+                  : "¡Excelente!, demostraste tener buena intuición. ¡Buen trabajo!"
+            }
+        </div>
           </p>
         </div>
         <div className="flex justify-center mt-10">

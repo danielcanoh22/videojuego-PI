@@ -35,6 +35,8 @@ interface GameContext {
   enemies: object[];
   closestEnemy: Enemy;
   trojanScore: number;
+  accuracyRate: number,
+  setAccuracyRate: (correct: boolean) => void;
   setTrojanScore: (score: number) => void;
   setClosestEnemy: (enemy: Enemy) => void;
   openPhishingGame: () => void;
@@ -67,6 +69,9 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
 
   const [enemies, setEnemies] = useState<Enemy[]>([]);
   const [trojanScore, setTrojanScore] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [totalAnswers, setTotalAnswers] = useState(0);
+  const [accuracyRate, setAccuracyRate] = useState(0);
   const [closestEnemy, setClosestEnemy] = useState({ id: 0, x: 0, y: 0, z: 0 });
 
   const [wonPhishing, setWonPhishing] = useState(false);
@@ -148,7 +153,7 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const handleEnemies = () => {
-    setEnemies(getUniqueRandomPositions(5, positions));
+    setEnemies(getUniqueRandomPositions(13, positions));
   };
 
   const handleTrojanGame = () => {
@@ -165,6 +170,22 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     setIsActiveGame(false);
   };
 
+  const handleAccuracyRate = (isCorrect:boolean) => {
+    setTotalAnswers((prevTotal) => {
+      const newTotalAnswers = prevTotal + 1;
+      setCorrectAnswers((prevCorrect) => {
+
+          const newCorrectAnswers = isCorrect ? prevCorrect + 1 : prevCorrect;
+          setAccuracyRate((newCorrectAnswers / newTotalAnswers) * 100);
+
+          return newCorrectAnswers;
+      });
+
+      return newTotalAnswers;
+    });
+  }
+
+
   const handleTrojanScore = (sc: number) => {
     if (trojanScore + sc < 0) setTrojanScore(0);
     else if (trojanScore + sc >= 100) {
@@ -175,6 +196,7 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
         setWonTrojan(true);
         setIsActiveGame(true);
         resetTrojanGame();
+        setAccuracyRate(0);
       }, 2000);
     } else setTrojanScore((prevScore: number) => prevScore + sc);
   };
@@ -209,6 +231,8 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
         openWinningScreen: handleOpenWinningScreen,
         closeWinningScreen: handleCloseWinningScreen,
         enemies,
+        accuracyRate,
+        setAccuracyRate: handleAccuracyRate,
         trojanScore,
         setTrojanScore: handleTrojanScore,
         closestEnemy,

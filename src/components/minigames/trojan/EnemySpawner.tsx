@@ -2,7 +2,7 @@ import { EnemyController } from "../../character/EnemyController";
 import { useGame } from "../../../context/GameContext";
 
 interface EnemySpawnerProps {
-  enemyCount?: number; // Optional prop to specify the number of enemies
+  enemyCount?: number; 
 }
 
 export const EnemySpawner: React.FC<EnemySpawnerProps> = () => {

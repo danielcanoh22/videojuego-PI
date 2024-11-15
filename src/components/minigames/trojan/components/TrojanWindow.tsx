@@ -4,12 +4,14 @@ import { ansOption } from "./options";
 import { useState } from "react";
 
 export const TrojanWindow = () => {
-  const { closeModal, removeEnemy, closestEnemy, trojanScore, setTrojanScore } =
+  const { closeModal, removeEnemy, closestEnemy, trojanScore, setTrojanScore, accuracyRate, setAccuracyRate } =
     useGame();
 
   const currentQuestion = ansOption.find(
     (question) => question.id === closestEnemy.id
   );
+  
+
   const [selectedOption, setSelectedOption] = useState<null | number>(null);
   const [isCorrect, setIsCorrect] = useState<null | boolean>(null);
 
@@ -19,6 +21,8 @@ export const TrojanWindow = () => {
     setSelectedOption(index);
     const correct = index === currentQuestion?.correct;
     setIsCorrect(correct);
+    setAccuracyRate(correct);
+
 
     const pointsEarned = correct ? 25 : -10;
     setTrojanScore(pointsEarned);
@@ -29,12 +33,14 @@ export const TrojanWindow = () => {
         closeModal();
       }, 1000);
 
+
       const audio = new Audio("/assets/sounds/correct.mp3");
       audio.play();
     } else {
       const audio = new Audio("/assets/sounds/error.mp3");
       audio.play();
     }
+   
   };
 
   return (
@@ -48,6 +54,7 @@ export const TrojanWindow = () => {
             x
           </button>
           <div className="text-center text-md">{currentQuestion?.question}</div>
+          <p>Promedio de aciertos {accuracyRate.toFixed(0)}%</p>
         </div>
 
         <div className="grid grid-cols-2 gap-6 mt-4">

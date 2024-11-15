@@ -2,8 +2,10 @@ import { useGame } from "../../../../context/GameContext";
 import { HomeScreenButton } from "../../../common/HomeScreenButton";
 import { GameImage } from "../../phishing/components/common";
 
+
 export const TrojanHomeScreen = () => {
   const { closeHomeTrojan } = useGame();
+  
 
   return (
     <div className="flex flex-col items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-200 z-50 w-2/3 p-8 rounded-md">

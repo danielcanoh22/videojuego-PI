@@ -13,6 +13,7 @@ import { CreditsScreen } from "./components/common/CreditsScreen";
 import { TrojanHomeScreen } from "./components/minigames/trojan/components/TrojanHomeScreen";
 import { WinningScreen } from "./components/minigames/trojan/components/WinningScreen";
 import { Star } from "./components/common/Star";
+import { useEffect } from "react";
 
 const keyboardMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -21,6 +22,8 @@ const keyboardMap = [
   { name: "right", keys: ["ArrowRight", "KeyD"] },
   { name: "run", keys: ["Shift"] },
 ];
+
+
 
 function App() {
   const {
@@ -41,8 +44,16 @@ function App() {
     showHomeTrojan ||
     showWinningScreen;
 
+  useEffect(() => {
+    const bgAudio = new Audio("/assets/sounds/fight.mp3");
+    bgAudio.play();
+    bgAudio.volume = 0.20;
+    
+  },[])
+
   return (
     <>
+
       {showHomeScreen && <HomeScreen />}
 
       {showCreditsScreen && <CreditsScreen />}
