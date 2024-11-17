@@ -13,6 +13,7 @@ export const ScoreSummary = ({
 
   return (
     <div className="flex flex-col gap-4 bg-blue-100 p-2 rounded-lg mt-4 shadow-md">
+      {/* @ts-expect-error Fix type */}
       {!content.isSmishing && (
         <>
           <p>⭐ Puntos ganados por identificar el correo: {pointsEarned}</p>
@@ -26,7 +27,7 @@ export const ScoreSummary = ({
           </p>
         </>
       )}
-
+      {/* @ts-expect-error Fix type */}
       {content.isSmishing && (
         <p>
           ⭐ Puntos ganados por identificar el mensaje de texto: {pointsEarned}

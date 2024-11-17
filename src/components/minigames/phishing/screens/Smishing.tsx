@@ -36,10 +36,12 @@ export const Smishing = ({
   onChooseOption: (option: boolean) => void;
   content: ContentData | SmishingData;
 }) => {
+  // @ts-expect-error Fix type
   const handleDropPositive = (item) => {
     onChooseOption(true);
   };
 
+  // @ts-expect-error Fix type
   const handleDropNegative = (item) => {
     onChooseOption(false);
   };
@@ -54,7 +56,9 @@ export const Smishing = ({
       </DropTarget>
 
       <PhoneLayout>
+        {/* @ts-expect-error Fix type */}
         <PhoneNavbar phoneNumber={content.number} />
+        {/* @ts-expect-error Fix type */}
         <PhoneMessage phoneMessage={content.message} />
       </PhoneLayout>
 

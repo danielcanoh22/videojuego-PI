@@ -29,7 +29,6 @@ export const GameOver = ({
   return (
     <GameLayout screen={screen}>
       <div className="z-20 flex flex-row-reverse justify-center">
-        {/* <h2 className="text-6xl">Pantalla Final</h2> */}
         <GameImage
           image="/assets/img/ruh-gameover.png"
           title="Imagen de Ruh, el personaje principal del videojuego."

@@ -102,14 +102,18 @@ export const CharacterController = () => {
       const playerPosition = rb.current.translation();
       enemies.forEach((enemy) => {
         const distance = Math.sqrt(
+          // @ts-expect-error Fix type
           (playerPosition.x - enemy.x) ** 2 +
+            // @ts-expect-error Fix type
             (playerPosition.y - enemy.y) ** 2 +
+            // @ts-expect-error Fix type
             (playerPosition.z - enemy.z) ** 2
         );
 
         const proximityThreshold = 0.6; // Umbral de proximidad para activar el modal
 
         if (distance < proximityThreshold && !showModal) {
+          // @ts-expect-error Fix type
           setClosestEnemy(enemy);
           openModal();
         }

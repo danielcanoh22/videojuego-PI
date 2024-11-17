@@ -18,7 +18,7 @@ export const PhishingGame = () => {
   const [score, setScore] = useState(0);
   const [additionalPoints, setAdditionalPoints] = useState([0, 0]);
 
-  let currentEmail = emailsData[emailsIndex];
+  const currentEmail = emailsData[emailsIndex];
 
   const handleRestartGame = () => {
     setScreen(1);
@@ -47,6 +47,7 @@ export const PhishingGame = () => {
       if (option && !elements.length) return;
 
       if (option === currentEmail.isSuspicious) {
+        /* @ts-expect-error Fix type */
         const points = calcScore(elements, currentEmail);
 
         setAdditionalPoints(points);

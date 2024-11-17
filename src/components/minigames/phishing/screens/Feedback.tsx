@@ -41,19 +41,23 @@ export const Feedback = ({
             <h3 className={`text-4xl ${bgColor} p-2 w-max rounded-md`}>
               <span className="font-bold">Respuesta:</span> {answer}
             </h3>
-
+            {/* @ts-expect-error Fix type */}
             {!content.isSmishing && (
               <div className="flex flex-col gap-4 mt-12 text-2xl mb-6">
                 <FeedbackItem item="Asunto">
+                  {/* @ts-expect-error Fix type */}
                   {content.feedback.subject}
                 </FeedbackItem>
                 <FeedbackItem item="Remitente">
+                  {/* @ts-expect-error Fix type */}
                   {content.feedback.sender}
                 </FeedbackItem>
                 <FeedbackItem item="Correo electrónico">
+                  {/* @ts-expect-error Fix type */}
                   {content.feedback.email}
                 </FeedbackItem>
                 <FeedbackItem item="Mensaje">
+                  {/* @ts-expect-error Fix type */}
                   {content.feedback.body}
                 </FeedbackItem>
 
@@ -62,22 +66,17 @@ export const Feedback = ({
                   additionalPoints={additionalPoints}
                   content={content}
                 />
-                {/* 
-                <Message styles="bg-red-100 shadow-md">
-                  <p className="font-bold">
-                    ⛔ Tipo de ataque:{" "}
-                    <span className="font-normal">Phishing</span>
-                  </p>
-                </Message> */}
               </div>
             )}
-
+            {/* @ts-expect-error Fix type */}
             {content.isSmishing && (
               <div className="flex flex-col gap-4 mt-12 text-2xl mb-6">
                 <FeedbackItem item="Número telefónico">
+                  {/* @ts-expect-error Fix type */}
                   {content.feedback.number}
                 </FeedbackItem>
                 <FeedbackItem item="Mensaje">
+                  {/* @ts-expect-error Fix type */}
                   {content.feedback.message}
                 </FeedbackItem>
 
@@ -86,13 +85,6 @@ export const Feedback = ({
                   additionalPoints={additionalPoints}
                   content={content}
                 />
-
-                {/* <Message styles="bg-red-100 shadow-md">
-                  <p className="font-bold">
-                    ⛔ Tipo de ataque:{" "}
-                    <span className="font-normal">Smishing</span>
-                  </p>
-                </Message> */}
               </div>
             )}
 
@@ -112,12 +104,14 @@ export const Feedback = ({
               <p className="font-bold">
                 ⛔ Tipo de ataque:{" "}
                 <span className="font-normal">
+                  {/* @ts-expect-error Fix type */}
                   {content.isSmishing ? "Smishing" : "Phishing"}
                 </span>
               </p>
             </Message>
             <div
               className="justify-self-center"
+              // @ts-expect-error Fix type
               style={content.isSmishing ? { width: "35%" } : {}}
             >
               <GameImage

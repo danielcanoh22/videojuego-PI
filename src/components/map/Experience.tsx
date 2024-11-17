@@ -6,8 +6,6 @@ import { CharacterController } from "../character/CharacterController";
 import { OrthographicCamera as ThreeOrthographicCamera } from "three";
 import { EnemySpawner } from "../minigames/trojan/EnemySpawner";
 import { useGame } from "../../context/GameContext";
-// import { EnemyController } from "../character/EnemyController.tsx";
-// import { EnemySpawner } from "../minigames/trojan/EnemySpawner.tsx";
 
 // SE LLAMA TODO - MAPA, ARCHIVO CHARACTER
 

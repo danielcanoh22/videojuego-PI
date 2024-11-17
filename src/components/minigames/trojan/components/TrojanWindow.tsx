@@ -4,13 +4,19 @@ import { ansOption } from "./options";
 import { useState } from "react";
 
 export const TrojanWindow = () => {
-  const { closeModal, removeEnemy, closestEnemy, trojanScore, setTrojanScore, accuracyRate, setAccuracyRate } =
-    useGame();
+  const {
+    closeModal,
+    removeEnemy,
+    closestEnemy,
+    trojanScore,
+    setTrojanScore,
+    accuracyRate,
+    setAccuracyRate,
+  } = useGame();
 
   const currentQuestion = ansOption.find(
     (question) => question.id === closestEnemy.id
   );
-  
 
   const [selectedOption, setSelectedOption] = useState<null | number>(null);
   const [isCorrect, setIsCorrect] = useState<null | boolean>(null);
@@ -23,8 +29,7 @@ export const TrojanWindow = () => {
     setIsCorrect(correct);
     setAccuracyRate(correct);
 
-
-    const pointsEarned = correct ? 25 : -10;
+    const pointsEarned = correct ? 15 : -10;
     setTrojanScore(pointsEarned);
 
     if (correct) {
@@ -33,14 +38,12 @@ export const TrojanWindow = () => {
         closeModal();
       }, 1000);
 
-
       const audio = new Audio("/assets/sounds/correct.mp3");
       audio.play();
     } else {
       const audio = new Audio("/assets/sounds/error.mp3");
       audio.play();
     }
-   
   };
 
   return (
