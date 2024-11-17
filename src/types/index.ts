@@ -48,3 +48,16 @@ export interface SmishingData {
     image: string;
   };
 }
+
+export interface Enemy {
+  id: number;
+  x: number;
+  y: number;
+  z: number;
+}
+
+export interface Coordinates {
+  x: number;
+  y: number;
+  z: number;
+}

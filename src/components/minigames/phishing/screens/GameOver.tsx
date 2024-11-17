@@ -1,3 +1,4 @@
+import { useGame } from "../../../../context/GameContext";
 import { MIN_SCORE } from "../../../../utils";
 import {
   GameImage,
@@ -17,6 +18,8 @@ export const GameOver = ({
   score: number;
   onRestart: () => void;
 }) => {
+  const { closePhishingGame } = useGame();
+
   const wonTheGame = score >= MIN_SCORE;
   const positiveMessage =
     "🎉 ¡Felicidades! Has evitado caer en las trampas de phishing y smishing. ¡Sigue así, protegiendo tu información personal y navegando con seguridad! 🎉";
@@ -55,7 +58,9 @@ export const GameOver = ({
             <NextScreenButton onClick={onRestart}>
               Volver a jugar
             </NextScreenButton>
-            <NextScreenButton>Salir</NextScreenButton>
+            <NextScreenButton onClick={closePhishingGame}>
+              Salir
+            </NextScreenButton>
           </div>
         </div>
       </div>

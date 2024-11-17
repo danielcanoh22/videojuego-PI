@@ -13,7 +13,18 @@ import { ROTATION_SPEED, RUN_SPEED, WALK_SPEED } from "../../utils/constants";
 import { useGame } from "../../context/GameContext";
 
 export const CharacterController = () => {
-  const { openPhishingGame, isActivePhishing } = useGame();
+  const {
+    openPhishingGame,
+    isActiveGame,
+    enemies,
+    setEnemies,
+    openModal,
+    showModal,
+    setClosestEnemy,
+    activeTrojanGame,
+    isActiveTrojanGame,
+    openHomeTrojan,
+  } = useGame();
 
   const rb = useRef<RapierRigidBody | null>(null);
   const container = useRef<Group | null>(null);
@@ -31,25 +42,38 @@ export const CharacterController = () => {
   const [, get] = useKeyboardControls();
 
   // Coordenada objetivo
-  // const targetPosition = { x: -9.46, y: -6.1, z: 1.52 };
+  // const targetPosition2 = { x: -15.21, y: -6.00, z: 0.35 };
   const targetPosition = { x: -9.51, y: -6.06, z: 1.27 };
   const proximityThreshold = 0.6; // Definir un umbral de cercanía
   const newSafePosition = { x: -8.56, y: -6.13, z: 2.66 };
 
+  const proximityThresholdTrojan = 1; // Definir un umbral de cercanía
+  const targetPositionTrojan = {
+    x: -16.91,
+    y: -5.08,
+    z: -11.99,
+  };
+
   useFrame(() => {
     if (rb.current) {
       const pos = rb.current.translation();
-      // console.log({
-      //   x: pos.x.toFixed(2),
-      //   y: pos.y.toFixed(2),
-      //   z: pos.z.toFixed(2),
-      // });
+      //  console.log({
+      //    x: pos.x.toFixed(2),
+      //    y: pos.y.toFixed(2),
+      //    z: pos.z.toFixed(2),
+      //  });
 
       // Calcular distancia entre el personaje y la coordenada objetivo
       const distance = Math.sqrt(
         (pos.x - targetPosition.x) ** 2 +
           (pos.y - targetPosition.y) ** 2 +
           (pos.z - targetPosition.z) ** 2
+      );
+
+      const distanceTrojan = Math.sqrt(
+        (pos.x - targetPositionTrojan.x) ** 2 +
+          (pos.y - targetPositionTrojan.y) ** 2 +
+          (pos.z - targetPositionTrojan.z) ** 2
       );
 
       // Si está lo suficientemente cerca, mostrar el modal
@@ -64,11 +88,37 @@ export const CharacterController = () => {
 
         setAnimation("idle");
       }
+
+      if (distanceTrojan < proximityThresholdTrojan && !isActiveTrojanGame) {
+        openHomeTrojan();
+        activeTrojanGame();
+        setEnemies();
+      }
+    }
+  });
+
+  useFrame(() => {
+    if (rb.current) {
+      const playerPosition = rb.current.translation();
+      enemies.forEach((enemy) => {
+        const distance = Math.sqrt(
+          (playerPosition.x - enemy.x) ** 2 +
+            (playerPosition.y - enemy.y) ** 2 +
+            (playerPosition.z - enemy.z) ** 2
+        );
+
+        const proximityThreshold = 0.6; // Umbral de proximidad para activar el modal
+
+        if (distance < proximityThreshold && !showModal) {
+          setClosestEnemy(enemy);
+          openModal();
+        }
+      });
     }
   });
 
   useFrame(({ camera }) => {
-    if (!isActivePhishing) {
+    if (!isActiveGame) {
       // Personaje
       if (rb.current) {
         const vel = rb.current.linvel();

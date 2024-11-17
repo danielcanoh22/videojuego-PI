@@ -4,21 +4,29 @@ import { Map } from "./Map";
 import { Physics } from "@react-three/rapier";
 import { CharacterController } from "../character/CharacterController";
 import { OrthographicCamera as ThreeOrthographicCamera } from "three";
+import { EnemySpawner } from "../minigames/trojan/EnemySpawner";
+import { useGame } from "../../context/GameContext";
+// import { EnemyController } from "../character/EnemyController.tsx";
+// import { EnemySpawner } from "../minigames/trojan/EnemySpawner.tsx";
+
+// SE LLAMA TODO - MAPA, ARCHIVO CHARACTER
 
 const maps: Record<
   string,
   { scale: number; position: [number, number, number] }
 > = {
-  map: {
+  map2: {
     scale: 0.4,
     position: [-9, -6.2, -1],
   },
 };
 
-const MAP_NAME = "map";
+const MAP_NAME = "map2";
 
 export const Experience = () => {
   const shadowCameraRef = useRef<ThreeOrthographicCamera>(null);
+
+  const { isActiveTrojanGame } = useGame();
 
   return (
     <>
@@ -49,6 +57,7 @@ export const Experience = () => {
           model={`/assets/models/${MAP_NAME}.glb`}
         />
         <CharacterController />
+        {isActiveTrojanGame && <EnemySpawner enemyCount={3} />}
       </Physics>
     </>
   );
