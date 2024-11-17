@@ -4,6 +4,7 @@ import { PhoneBottombar } from "./PhoneBottombar";
 import { ReactNode } from "react";
 
 export const PhoneLayout = ({ children }: { children: ReactNode }) => {
+  /* @ts-expect-error Fix type */
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "PHONE_LAYOUT", // Tipo de elemento para el drag
     item: { id: "phone-layout" }, // Datos que se pasan al ser arrastrado

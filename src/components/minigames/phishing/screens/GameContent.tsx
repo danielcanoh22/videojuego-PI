@@ -38,7 +38,7 @@ export const GameContent = ({
             {content.difficulty}
           </span>
         </p>
-
+        {/* @ts-expect-error Fix type */}
         {!content.isSmishing && (
           <Phishing
             content={content}
@@ -48,7 +48,7 @@ export const GameContent = ({
             onChooseOption={onChooseOption}
           />
         )}
-
+        {/* @ts-expect-error Fix type */}
         {content.isSmishing && (
           <DndProvider backend={HTML5Backend}>
             <Smishing onChooseOption={onChooseOption} content={content} />

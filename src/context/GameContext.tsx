@@ -35,7 +35,7 @@ interface GameContext {
   enemies: object[];
   closestEnemy: Enemy;
   trojanScore: number;
-  accuracyRate: number,
+  accuracyRate: number;
   setAccuracyRate: (correct: boolean) => void;
   setTrojanScore: (score: number) => void;
   setClosestEnemy: (enemy: Enemy) => void;
@@ -71,11 +71,19 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
   const [trojanScore, setTrojanScore] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [totalAnswers, setTotalAnswers] = useState(0);
-  const [accuracyRate, setAccuracyRate] = useState(0);
-  const [closestEnemy, setClosestEnemy] = useState({ id: 0, x: 0, y: 0, z: 0 });
+
+  const [closestEnemy, setClosestEnemy] = useState<Enemy>({
+    id: 0,
+    x: 0,
+    y: 0,
+    z: 0,
+  });
 
   const [wonPhishing, setWonPhishing] = useState(false);
   const [wonTrojan, setWonTrojan] = useState(false);
+
+  const accuracyRate =
+    totalAnswers > 0 ? (correctAnswers / totalAnswers) * 100 : 0;
 
   const handleCloseHomeScreen = () => {
     setShowHomeScreen(false);
@@ -170,21 +178,12 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     setIsActiveGame(false);
   };
 
-  const handleAccuracyRate = (isCorrect:boolean) => {
-    setTotalAnswers((prevTotal) => {
-      const newTotalAnswers = prevTotal + 1;
-      setCorrectAnswers((prevCorrect) => {
-
-          const newCorrectAnswers = isCorrect ? prevCorrect + 1 : prevCorrect;
-          setAccuracyRate((newCorrectAnswers / newTotalAnswers) * 100);
-
-          return newCorrectAnswers;
-      });
-
-      return newTotalAnswers;
-    });
-  }
-
+  const handleAccuracyRate = (isCorrect: boolean) => {
+    setTotalAnswers((prev) => prev + 1);
+    if (isCorrect) {
+      setCorrectAnswers((prev) => prev + 1);
+    }
+  };
 
   const handleTrojanScore = (sc: number) => {
     if (trojanScore + sc < 0) setTrojanScore(0);
@@ -196,7 +195,6 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
         setWonTrojan(true);
         setIsActiveGame(true);
         resetTrojanGame();
-        setAccuracyRate(0);
       }, 2000);
     } else setTrojanScore((prevScore: number) => prevScore + sc);
   };

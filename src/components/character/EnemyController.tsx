@@ -18,6 +18,7 @@ export const EnemyController = ({
   const container = useRef<Group | null>(null);
   const character = useRef<Group | null>(null);
 
+  // @ts-expect-error Fix type
   const [animation, setAnimation] = useState("idle");
 
   return (

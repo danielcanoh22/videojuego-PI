@@ -61,7 +61,6 @@ export const getUniqueRandomPositions = (
       uniquePositions.push(positions[randomIndex]);
     }
   }
-  console.log("Unique positions:", uniquePositions);
 
   return uniquePositions;
 };
