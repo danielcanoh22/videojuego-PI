@@ -1,30 +1,20 @@
-# React + TypeScript + Vite
+# Academia Ruh: Estrategia educativa para el aprendizaje de delitos informáticos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p>Proyecto realizado para el curso Proyecto Integrador I - Universidad de Antioquia</p>
 
-Currently, two official plugins are available:
+</hr>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Descripción
 
-## Expanding the ESLint configuration
+Academia de Ruh es un videojuego educativo que invita a los jugadores a explorar una ciudad virtual con algunos retos interactivos sobre ciberseguridad. El jugador controla a Ruh, un personaje que recorre un mapa de la ciudad en busca de puntos clave. Al llegar a estos puntos, se activan desafíos que ponen a prueba sus conocimientos en temas de seguridad en línea.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+El juego cuenta con dos tipos de retos principales: en el primero, el jugador debe identificar correos electrónicos y mensajes de texto sospechosos para evitar ser victima de ataques de phishing y smishing. En el segundo, el jugador se enfrenta a enemigos que le presentan preguntas de opción múltiple sobre ciberseguridad; si responde correctamente, los enemigos desaparecen, permitiéndole avanzar por la ciudad.
 
-- Configure the top-level `parserOptions` property like this:
+## Características del juego
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- Escenarios educativos relacionados con phishing y preguntas sobre situaciones relacionadas con ciberseguridad.
+- Indicadores como puntuación, tasa de precisión y progreso general del jugador.
+- Gráficos interactivos y un diseño amigable.
+- Acceso directo desde cualquier navegador moderno.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+##
