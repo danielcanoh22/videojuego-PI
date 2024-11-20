@@ -1,8 +1,6 @@
 # Academia Ruh: Estrategia educativa para el aprendizaje de delitos informáticos
 
-<p>Proyecto realizado para el curso Proyecto Integrador I - Universidad de Antioquia</p>
-
-</hr>
+<i>Proyecto realizado para el curso Proyecto Integrador I - Universidad de Antioquia</i>
 
 ## Descripción
 
@@ -17,4 +15,38 @@ El juego cuenta con dos tipos de retos principales: en el primero, el jugador de
 - Gráficos interactivos y un diseño amigable.
 - Acceso directo desde cualquier navegador moderno.
 
-##
+## Ejecución
+
+<p>Se puede ingresar al videojuego directamente en este <a href="https://videojuego-pi.vercel.app/" target="_blank">enlace</a>.</p>
+
+<p>Para ejecutar el proyecto en local, seguir los siguientes pasos:</p>
+
+Clonar el repositorio
+``` bash 
+git clone https://github.com/danielcanoh22/videojuego-PI.git
+```
+
+Instalar las dependencias
+``` bash 
+npm install
+```
+
+Ejecutar el proyecto
+``` bash 
+npm run dev
+```
+
+## Tecnologías utilizadas
+* React.js
+* TypeScript
+* Three.js
+* Tailwind CSS
+
+## Créditos
+
+* <b>Desarrolladores</b>: Daniel Cano Hernández y Alejandra Díaz Hernández
+* <b>Modelos 3D</b>: "Cupguy" (https://skfb.ly/otHu9) by Ivan Petralia is licensed 
+under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+"Invasion Halloween Map - miniroyale.io" (https://skfb.ly/oVBsY) by zct_33 is 
+licensed under Creative Commons Attribution 
+(http://creativecommons.org/licenses/by/4.0/)
