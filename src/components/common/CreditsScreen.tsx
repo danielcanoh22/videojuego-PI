@@ -54,7 +54,10 @@ export const CreditsScreen = () => {
           </a>
           ).
         </p>
-
+        <h4 className="text-2xl mb-2 mt-8 font-semibold" >Musica</h4>
+        <p>"Metal Gear Solid Main Theme", compuesta por TAPPY (Takanari Ishiyama), <br/> utilizada en el videojuego Metal Gear Solid,
+        <br/> desarrollado y publicado por Konami, 1998.</p>
+      
         <h3 className="text-3xl mb-6 font-bold mt-10">Desarrolladores</h3>
         <p>Daniel Cano Hernández</p>
         <p>Alejandra Díaz Hernández</p>

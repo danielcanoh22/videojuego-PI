@@ -44,13 +44,13 @@ function App() {
     showHomeTrojan ||
     showWinningScreen;
 
-  useEffect(() => {
-    const bgAudio = new Audio("/assets/sounds/fight.mp3");
-    bgAudio.play();
-    bgAudio.volume = 0.20;
-    bgAudio.loop = true;
+   useEffect(() => {
+     const bgAudio = new Audio("/assets/sounds/fight.mp3");
+     bgAudio.play();
+     bgAudio.volume = 0.20;
+     bgAudio.loop = true;
     
-  },[])
+   },[])
 
   return (
     <>
