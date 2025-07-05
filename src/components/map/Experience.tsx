@@ -1,11 +1,11 @@
 import { Environment, OrthographicCamera } from "@react-three/drei";
+import { OrthographicCamera as ThreeOrthographicCamera } from "three";
+import { Physics } from "@react-three/rapier";
 import { useRef } from "react";
 import { Map } from "./Map";
-import { Physics } from "@react-three/rapier";
-import { CharacterController } from "../character/CharacterController";
-import { OrthographicCamera as ThreeOrthographicCamera } from "three";
-import { EnemySpawner } from "../minigames/trojan/EnemySpawner";
-import { useTrojanGame } from "../../context/TrojanGameContext";
+import { CharacterController } from "@/components/character/CharacterController";
+import { useTrojanGame } from "@/context/TrojanGameContext";
+import { EnemySpawner } from "@/components/minigames/trojan/EnemySpawner";
 
 const maps: Record<
   string,
@@ -54,7 +54,7 @@ export const Experience = () => {
           model={`/assets/models/${MAP_NAME}.glb`}
         />
         <CharacterController />
-        {isGameActive && <EnemySpawner enemyCount={3} />}
+        {isGameActive && <EnemySpawner />}
       </Physics>
     </>
   );

@@ -1,19 +1,3 @@
-import { Vector3 } from "three";
-
-export interface CharacterProps {
-  animation: string;
-  scale?: number | [number, number, number];
-  position?: Vector3;
-}
-
-export interface MapProps {
-  model: string;
-  scale?: number | [number, number, number];
-  position?: [number, number, number];
-}
-
-// Phishing game
-
 export interface EmailElementType {
   id: string;
   name: string;
@@ -49,17 +33,3 @@ export interface SmsContentData extends BaseContent {
 }
 
 export type PhishingContent = EmailContentData | SmsContentData;
-
-export interface Enemy {
-  id: number;
-  x: number;
-  y: number;
-  z: number;
-}
-
-export interface Coordinates {
-  id: number;
-  x: number;
-  y: number;
-  z: number;
-}

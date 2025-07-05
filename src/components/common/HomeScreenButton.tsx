@@ -1,12 +1,14 @@
 import { ReactNode } from "react";
 
+type HomeScreenButtonProps = {
+  children: ReactNode;
+  onClick?: () => void;
+};
+
 export const HomeScreenButton = ({
   children,
   onClick,
-}: {
-  children: ReactNode;
-  onClick?: () => void;
-}) => {
+}: HomeScreenButtonProps) => {
   return (
     <button
       type="button"

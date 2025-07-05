@@ -1,22 +1,18 @@
-import { usePhishingGame } from "../../../../context/PhishingGameContext";
-import { MIN_SCORE } from "../../../../utils";
-import {
-  GameImage,
-  GameLayout,
-  Message,
-  NextScreenButton,
-} from "../components/common";
-import { Tips } from "../components/gameover/Tips";
+import { usePhishingGame } from "@/context/PhishingGameContext";
+import { MIN_SCORE } from "@/utils/constants";
+import { GameLayout } from "@/components/minigames/phishing/components/common/GameLayout";
+import { GameImage } from "@/components/common/GameImage";
+import { Message } from "@/components/minigames/phishing/components/common/Message";
+import { Tips } from "@/components/minigames/phishing/components/gameover/Tips";
+import { NextScreenButton } from "@/components/minigames/phishing/components/common/NextScreenButton";
 
-export const GameOver = ({
-  screen,
-  score,
-  onRestart,
-}: {
+type GameOverProps = {
   screen: number;
   score: number;
   onRestart: () => void;
-}) => {
+};
+
+export const GameOver = ({ screen, score, onRestart }: GameOverProps) => {
   const { closePhishingGame } = usePhishingGame();
 
   const wonTheGame = score >= MIN_SCORE;

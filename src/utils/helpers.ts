@@ -1,10 +1,5 @@
-import {
-  Coordinates,
-  EmailContentData,
-  EmailElementType,
-  PhishingContent,
-  SmsContentData,
-} from "../types";
+import { EmailContentData, EmailElementType } from "@/types/phishing";
+import { Coordinates } from "@/types/trojan";
 
 const normalizeAngle = (angle: number) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;

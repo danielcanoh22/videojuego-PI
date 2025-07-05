@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useUI } from "../../context/UIContext";
+import { useUI } from "@/context/UIContext";
 
 export const HomeControls = () => {
   const { hideCurrentScreen } = useUI();

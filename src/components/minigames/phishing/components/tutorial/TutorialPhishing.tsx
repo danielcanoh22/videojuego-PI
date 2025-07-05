@@ -1,5 +1,6 @@
-import { GameImage, Message } from "../common";
 import { TutorialPhishingSteps } from "./TutorialPhishingSteps";
+import { Message } from "@/components/minigames/phishing/components/common/Message";
+import { GameImage } from "@/components/common/GameImage";
 
 export const TutorialPhishing = () => {
   return (

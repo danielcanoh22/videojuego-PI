@@ -1,17 +1,15 @@
 import Swal from "sweetalert2";
-
 import { ReactNode } from "react";
-import { GameImage } from "./GameImage";
 import { NextScreenButton } from "./NextScreenButton";
-import { usePhishingGame } from "../../../../../context/PhishingGameContext";
+import { usePhishingGame } from "@/context/PhishingGameContext";
+import { GameImage } from "@/components/common/GameImage";
 
-export const GameLayout = ({
-  children,
-  screen,
-}: {
+type GameLayoutProps = {
   children: ReactNode;
   screen?: number;
-}) => {
+};
+
+export const GameLayout = ({ children, screen }: GameLayoutProps) => {
   const { closePhishingGame } = usePhishingGame();
 
   const handleExitGame = () => {

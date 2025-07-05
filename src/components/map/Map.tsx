@@ -1,8 +1,13 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
-import { useEffect, useRef } from "react";
-import { MapProps } from "../../types";
 import { Group, Mesh } from "three";
+import { useEffect, useRef } from "react";
+
+export interface MapProps {
+  model: string;
+  scale?: number | [number, number, number];
+  position?: [number, number, number];
+}
 
 export const Map = ({ model, ...props }: MapProps) => {
   const { scene, animations } = useGLTF(model);

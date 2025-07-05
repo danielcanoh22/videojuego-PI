@@ -1,6 +1,17 @@
-import { ContentData, EmailElementType, SmishingData } from "../../../../types";
-import { GameButton, Message } from "../components/common";
-import { EmailContent, EmailElement, EmailLayout } from "../components/email";
+import { EmailContentData, EmailElementType } from "@/types/phishing";
+import { EmailLayout } from "@/components/minigames/phishing/components/email/EmailLayout";
+import { EmailContent } from "@/components/minigames/phishing/components/email/EmailContent";
+import { Message } from "@/components/minigames/phishing/components/common/Message";
+import { EmailElement } from "@/components/minigames/phishing/components/email/EmailElement";
+import { GameButton } from "@/components/minigames/phishing/components/common/GameButton";
+
+type PhishingProps = {
+  content: EmailContentData;
+  elements: EmailElementType[];
+  onChooseOption: (option: boolean) => void;
+  onAddElement: (element: EmailElementType) => void;
+  onRemoveElement: (id: string) => void;
+};
 
 export const Phishing = ({
   content,
@@ -8,13 +19,7 @@ export const Phishing = ({
   onAddElement,
   onRemoveElement,
   onChooseOption,
-}: {
-  content: ContentData | SmishingData;
-  elements: EmailElementType[];
-  onChooseOption: (option: boolean) => void;
-  onAddElement: (element: EmailElementType) => void;
-  onRemoveElement: (id: string) => void;
-}) => {
+}: PhishingProps) => {
   return (
     <div className="grid grid-cols-[1fr_25%_20%] gap-14 h-full w-[90%] mx-auto mt-10">
       <EmailLayout>

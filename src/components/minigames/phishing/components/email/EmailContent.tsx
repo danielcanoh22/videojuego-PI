@@ -1,18 +1,14 @@
 import { BsTrash } from "react-icons/bs";
 import { EmailButton } from "./EmailButton";
-import {
-  ContentData,
-  EmailElementType,
-  SmishingData,
-} from "../../../../../types";
-import { EMAIL_PARTS } from "../../../../../utils";
+import { EmailContentData, EmailElementType } from "@/types/phishing";
+import { EMAIL_PARTS } from "@/utils/constants";
 
 export const EmailContent = ({
   onAddElement,
   content,
 }: {
   onAddElement: (element: EmailElementType) => void;
-  content: ContentData | SmishingData;
+  content: EmailContentData;
 }) => {
   const addElement = (element: string) => {
     const id = crypto.randomUUID();
@@ -25,7 +21,6 @@ export const EmailContent = ({
         className="text-xl mb-4 cursor-pointer hover:text-purple-700"
         onClick={() => addElement(EMAIL_PARTS.subject)}
       >
-        {/* @ts-expect-error Fix type */}
         {content.subject}
       </h4>
       <div className="flex justify-between items-center">
@@ -33,7 +28,6 @@ export const EmailContent = ({
           className="text-lg font-bold cursor-pointer hover:text-purple-700"
           onClick={() => addElement(EMAIL_PARTS.sender)}
         >
-          {/* @ts-expect-error Fix type */}
           {content.sender}
         </p>
         <small>mar, 17 sept, 20:53 </small>
@@ -42,14 +36,12 @@ export const EmailContent = ({
         className="font-normal text-blue-700 underline underline-offset-2 mb-8 mt-2 cursor-pointer hover:text-purple-700"
         onClick={() => addElement(EMAIL_PARTS.email)}
       >
-        {/* @ts-expect-error Fix type */}
         {content.email}
       </p>
       <p
         className="cursor-pointer hover:text-purple-700"
         onClick={() => addElement(EMAIL_PARTS.body)}
       >
-        {/* @ts-expect-error Fix type */}
         {content.body}
       </p>
       <div className="flex items-center justify-between mt-10">

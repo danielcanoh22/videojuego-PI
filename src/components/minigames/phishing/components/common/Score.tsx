@@ -1,5 +1,5 @@
 import { FaStar } from "react-icons/fa";
-import { MIN_SCORE } from "../../../../../utils";
+import { MIN_SCORE } from "@/utils/constants";
 
 export const Score = ({ value }: { value: number }) => {
   return (

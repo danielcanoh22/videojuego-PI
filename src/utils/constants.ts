@@ -8,14 +8,14 @@ export const ROTATION_SPEED = degToRad(0.8);
 // Phishing game
 export const MIN_SCORE = 100;
 
-export const emailElements = {
-  SUBJECT: "Asunto",
-  SENDER: "Remitente",
-  EMAIL: "Correo electrónico",
-  BODY: "Mensaje",
-};
+// export const emailElements = {
+//   SUBJECT: "Asunto",
+//   SENDER: "Remitente",
+//   EMAIL: "Correo electrónico",
+//   BODY: "Mensaje",
+// };
 
-export const difficulty = {
+export const DIFFICULTY = {
   EASY: "Fácil",
   MID: "Media",
   HARD: "Difícil",
@@ -26,7 +26,4 @@ export const EMAIL_PARTS = {
   sender: "Remitente",
   email: "Correo electrónico",
   body: "Mensaje",
-};
-export const SCENE = {
-  //SCENE
 };

@@ -1,4 +1,9 @@
-export const Tip = ({ title, message }: { title: string; message: string }) => {
+type TipProps = {
+  title: string;
+  message: string;
+};
+
+export const Tip = ({ title, message }: TipProps) => {
   return (
     <li className="text-2xl">
       🚧

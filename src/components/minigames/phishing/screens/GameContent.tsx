@@ -1,11 +1,24 @@
-import { ContentData, EmailElementType, SmishingData } from "../../../../types";
-import { GameLayout, Score } from "../components/common";
-
-import { difficulty } from "../../../../utils";
-import { Smishing } from "./Smishing";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import {
+  EmailContentData,
+  EmailElementType,
+  PhishingContent,
+} from "@/types/phishing";
+import { DIFFICULTY } from "@/utils/constants";
 import { Phishing } from "./Phishing";
+import { Smishing } from "./Smishing";
+import { GameLayout } from "@/components/minigames/phishing/components/common/GameLayout";
+import { Score } from "@/components/minigames/phishing/components/common/Score";
+
+type GameContentProps = {
+  content: PhishingContent;
+  score: number;
+  elements: EmailElementType[];
+  onChooseOption: (option: boolean) => void;
+  onAddElement: (element: EmailElementType) => void;
+  onRemoveElement: (id: string) => void;
+};
 
 export const GameContent = ({
   content,
@@ -14,19 +27,12 @@ export const GameContent = ({
   elements,
   onAddElement,
   onRemoveElement,
-}: {
-  content: ContentData | SmishingData;
-  score: number;
-  elements: EmailElementType[];
-  onChooseOption: (option: boolean) => void;
-  onAddElement: (element: EmailElementType) => void;
-  onRemoveElement: (id: string) => void;
-}) => {
+}: GameContentProps) => {
   let difficultyColor;
 
-  if (content.difficulty === difficulty.EASY) difficultyColor = "bg-green-200";
-  if (content.difficulty === difficulty.MID) difficultyColor = "bg-yellow-200";
-  if (content.difficulty === difficulty.HARD) difficultyColor = "bg-red-200";
+  if (content.difficulty === DIFFICULTY.EASY) difficultyColor = "bg-green-200";
+  if (content.difficulty === DIFFICULTY.MID) difficultyColor = "bg-yellow-200";
+  if (content.difficulty === DIFFICULTY.HARD) difficultyColor = "bg-red-200";
 
   return (
     <GameLayout>
@@ -38,17 +44,17 @@ export const GameContent = ({
             {content.difficulty}
           </span>
         </p>
-        {/* @ts-expect-error Fix type */}
+
         {!content.isSmishing && (
           <Phishing
-            content={content}
+            content={content as EmailContentData}
             elements={elements}
             onAddElement={onAddElement}
             onRemoveElement={onRemoveElement}
             onChooseOption={onChooseOption}
           />
         )}
-        {/* @ts-expect-error Fix type */}
+
         {content.isSmishing && (
           <DndProvider backend={HTML5Backend}>
             <Smishing onChooseOption={onChooseOption} content={content} />

@@ -1,4 +1,4 @@
-import { Message } from "../common";
+import { Message } from "@/components/minigames/phishing/components/common/Message";
 import { TutorialSmishingSteps } from "./TutorialSmishingSteps";
 
 export const TutorialSmishing = () => {

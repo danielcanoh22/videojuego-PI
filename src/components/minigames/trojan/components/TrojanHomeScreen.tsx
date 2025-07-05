@@ -1,6 +1,6 @@
-import { useTrojanGame } from "../../../../context/TrojanGameContext";
-import { HomeScreenButton } from "../../../common/HomeScreenButton";
-import { GameImage } from "../../phishing/components/common";
+import { useTrojanGame } from "@/context/TrojanGameContext";
+import { GameImage } from "@/components/common/GameImage";
+import { HomeScreenButton } from "@/components/common/HomeScreenButton";
 
 export const TrojanHomeScreen = () => {
   const { startGame } = useTrojanGame();

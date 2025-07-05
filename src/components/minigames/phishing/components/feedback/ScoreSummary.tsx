@@ -1,19 +1,20 @@
-import { ContentData, SmishingData } from "../../../../../types";
+import { PhishingContent } from "@/types/phishing";
+
+type ScoreSummaryProps = {
+  correctAnswer: boolean;
+  additionalPoints: number[];
+  content: PhishingContent;
+};
 
 export const ScoreSummary = ({
   correctAnswer,
   additionalPoints,
   content,
-}: {
-  correctAnswer: boolean;
-  additionalPoints: number[];
-  content: ContentData | SmishingData;
-}) => {
+}: ScoreSummaryProps) => {
   const pointsEarned = correctAnswer ? 20 : 0;
 
   return (
     <div className="flex flex-col gap-4 bg-blue-100 p-2 rounded-lg mt-4 shadow-md">
-      {/* @ts-expect-error Fix type */}
       {!content.isSmishing && (
         <>
           <p>⭐ Puntos ganados por identificar el correo: {pointsEarned}</p>
@@ -27,7 +28,7 @@ export const ScoreSummary = ({
           </p>
         </>
       )}
-      {/* @ts-expect-error Fix type */}
+
       {content.isSmishing && (
         <p>
           ⭐ Puntos ganados por identificar el mensaje de texto: {pointsEarned}

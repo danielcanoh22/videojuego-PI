@@ -1,6 +1,6 @@
+import { usePhishingGame } from "@/context/PhishingGameContext";
+import { useTrojanGame } from "@/context/TrojanGameContext";
 import { useEffect, useMemo, useState } from "react";
-import { useTrojanGame } from "../../context/TrojanGameContext";
-import { usePhishingGame } from "../../context/PhishingGameContext";
 
 export const Star = () => {
   const { state } = useTrojanGame();

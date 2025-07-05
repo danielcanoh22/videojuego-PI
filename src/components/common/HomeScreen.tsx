@@ -1,6 +1,6 @@
-import { useUI } from "../../context/UIContext";
-import { GameImage } from "../minigames/phishing/components/common";
+import { useUI } from "@/context/UIContext";
 import { HomeScreenButton } from "./HomeScreenButton";
+import { GameImage } from "./GameImage";
 
 export const HomeScreen = () => {
   const { showTutorial, showCredits } = useUI();

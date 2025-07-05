@@ -5,14 +5,14 @@ import {
   RapierRigidBody,
   RigidBody,
 } from "@react-three/rapier";
-import { useRef, useState } from "react";
 import { MathUtils, Vector3, Group } from "three";
+import { useRef, useState } from "react";
 import { Character } from "./Character";
-import { lerpAngle } from "../../utils/utils";
-import { ROTATION_SPEED, RUN_SPEED, WALK_SPEED } from "../../utils/constants";
-import { useTrojanGame } from "../../context/TrojanGameContext";
-import { useUI } from "../../context/UIContext";
-import { usePhishingGame } from "../../context/PhishingGameContext";
+import { useUI } from "@/context/UIContext";
+import { usePhishingGame } from "@/context/PhishingGameContext";
+import { useTrojanGame } from "@/context/TrojanGameContext";
+import { ROTATION_SPEED, RUN_SPEED, WALK_SPEED } from "@/utils/constants";
+import { lerpAngle } from "@/utils/helpers";
 
 const PROXIMITY_THRESHOLD = 0.6;
 const PHISHING_TRIGGER_POSITION = { x: -9.51, y: -6.06, z: 1.27 };

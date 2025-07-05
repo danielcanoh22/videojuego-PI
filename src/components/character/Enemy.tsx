@@ -1,7 +1,7 @@
-import { useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import { CharacterProps } from "../../types";
+import { useRef } from "react";
+import { CharacterProps } from "@/types/global";
 
 export function Enemy({ animation, ...props }: CharacterProps) {
   const capsuleRef = useRef<THREE.Mesh>(null);

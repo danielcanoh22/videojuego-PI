@@ -1,6 +1,6 @@
-import { useTrojanGame } from "../../../../context/TrojanGameContext";
-import { useUI } from "../../../../context/UIContext";
-import { HomeScreenButton } from "../../../common/HomeScreenButton";
+import { useTrojanGame } from "@/context/TrojanGameContext";
+import { useUI } from "@/context/UIContext";
+import { HomeScreenButton } from "@/components/common/HomeScreenButton";
 
 export const WinningScreen = () => {
   const { hideCurrentScreen } = useUI();

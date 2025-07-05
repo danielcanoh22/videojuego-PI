@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-import { Window } from "../../layout/Window";
-import { Welcome, Tutorial, GameContent, Feedback, GameOver } from "./screens";
+import { usePhishingGame } from "@/context/PhishingGameContext";
+import { EmailContentData, EmailElementType } from "@/types/phishing";
+import { calcScore } from "@/utils/helpers";
 import { emailsData } from "./data";
-import { EmailContentData, EmailElementType } from "../../../types";
-import { calcScore } from "../../../utils";
-import { usePhishingGame } from "../../../context/PhishingGameContext";
+
+import { Window } from "@/components/layout/Window";
+import { Welcome } from "./screens/Welcome";
+import { Tutorial } from "./screens/Tutorial";
+import { GameContent } from "./screens/GameContent";
+import { Feedback } from "./screens/Feedback";
+import { GameOver } from "./screens/GameOver";
 
 export const PhishingGame = () => {
   const { winGame } = usePhishingGame();

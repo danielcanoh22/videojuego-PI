@@ -1,11 +1,7 @@
-import { EnemyController } from "../../character/EnemyController";
-import { useTrojanGame } from "../../../context/TrojanGameContext";
+import { useTrojanGame } from "@/context/TrojanGameContext";
+import { EnemyController } from "@/components/character/EnemyController";
 
-interface EnemySpawnerProps {
-  enemyCount?: number;
-}
-
-export const EnemySpawner: React.FC<EnemySpawnerProps> = () => {
+export const EnemySpawner = () => {
   const { state } = useTrojanGame();
   const { enemies } = state;
 

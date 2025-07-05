@@ -1,21 +1,19 @@
 import { Canvas } from "@react-three/fiber";
 import { KeyboardControls } from "@react-three/drei";
-import { Experience } from "./components/map/Experience";
-
-import { PhishingGame } from "./components/minigames/phishing/PhishingGame";
-
 import "@fontsource-variable/exo-2";
-import { TrojanWindow } from "./components/minigames/trojan/components/TrojanWindow";
-import { HomeScreen } from "./components/common/HomeScreen";
-import { HomeTutorial } from "./components/common/HomeTutorial";
-import { HomeControls } from "./components/common/HomeControls";
-import { CreditsScreen } from "./components/common/CreditsScreen";
-import { TrojanHomeScreen } from "./components/minigames/trojan/components/TrojanHomeScreen";
-import { WinningScreen } from "./components/minigames/trojan/components/WinningScreen";
-import { Star } from "./components/common/Star";
-import { useTrojanGame } from "./context/TrojanGameContext";
-import { useUI } from "./context/UIContext";
-import { usePhishingGame } from "./context/PhishingGameContext";
+import { useTrojanGame } from "@/context/TrojanGameContext";
+import { useUI } from "@/context/UIContext";
+import { usePhishingGame } from "@/context/PhishingGameContext";
+import { Experience } from "@/components/map/Experience";
+import { PhishingGame } from "@/components/minigames/phishing/PhishingGame";
+import { TrojanWindow } from "@/components/minigames/trojan/components/TrojanWindow";
+import { HomeScreen } from "@/components/common/HomeScreen";
+import { HomeTutorial } from "@/components/common/HomeTutorial";
+import { HomeControls } from "@/components/common/HomeControls";
+import { CreditsScreen } from "@/components/common/CreditsScreen";
+import { TrojanHomeScreen } from "@/components/minigames/trojan/components/TrojanHomeScreen";
+import { WinningScreen } from "@/components/minigames/trojan/components/WinningScreen";
+import { Star } from "@/components/common/Star";
 
 const keyboardMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },

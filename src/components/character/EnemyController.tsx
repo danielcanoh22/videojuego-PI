@@ -3,10 +3,10 @@ import {
   RapierRigidBody,
   RigidBody,
 } from "@react-three/rapier";
-import { useRef } from "react";
 import { Group, Vector3 } from "three";
+import { useRef } from "react";
 import { Enemy } from "./Enemy";
-import { Enemy as EnemyType } from "../../types";
+import { Enemy as EnemyType } from "@/types/trojan";
 
 export const EnemyController = ({
   coordinates,

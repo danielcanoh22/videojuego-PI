@@ -1,7 +1,7 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
-import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { CharacterProps } from "../../types";
+import { useEffect, useRef } from "react";
+import { CharacterProps } from "@/types/global";
 
 export function Character({ animation, ...props }: CharacterProps) {
   const group = useRef<THREE.Group>();

@@ -1,14 +1,16 @@
 import { ReactNode } from "react";
 
+type NextScreenButtonProps = {
+  children: ReactNode;
+  styles?: string;
+  onClick?: () => void;
+};
+
 export const NextScreenButton = ({
   children,
   styles,
   onClick,
-}: {
-  children: ReactNode;
-  styles?: string;
-  onClick?: () => void;
-}) => {
+}: NextScreenButtonProps) => {
   return (
     <button
       type="button"

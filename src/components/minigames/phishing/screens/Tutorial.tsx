@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { GameLayout, NextScreenButton } from "../components/common";
-import { TutorialPhishing } from "../components/tutorial/TutorialPhishing";
-import { TutorialSmishing } from "../components/tutorial/TutorialSmishing";
+import { GameLayout } from "@/components/minigames/phishing/components/common/GameLayout";
+import { NextScreenButton } from "@/components/minigames/phishing/components/common/NextScreenButton";
+import { TutorialPhishing } from "@/components/minigames/phishing/components/tutorial/TutorialPhishing";
+import { TutorialSmishing } from "@/components/minigames/phishing/components/tutorial/TutorialSmishing";
 
 export const Tutorial = ({ onNextSection }: { onNextSection: () => void }) => {
   const [tutorialScreen, setTutorialScreen] = useState(0);

@@ -1,16 +1,15 @@
 import { useDrop } from "react-dnd";
-import { PhoneLayout } from "../components/phone/PhoneLayout";
-
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaRegCheckCircle } from "react-icons/fa";
-import { ContentData, SmishingData } from "../../../../types";
-import { PhoneNavbar } from "../components/phone/PhoneNavbar";
-import { PhoneMessage } from "../components/phone/PhoneMessage";
+import { SmsContentData } from "@/types/phishing";
+import { PhoneLayout } from "@/components/minigames/phishing/components/phone/PhoneLayout";
+import { PhoneNavbar } from "@/components/minigames/phishing/components/phone/PhoneNavbar";
+import { PhoneMessage } from "@/components/minigames/phishing/components/phone/PhoneMessage";
 
 export const DropTarget = ({ onDrop, children }) => {
   const [{ isOver }, drop] = useDrop(() => ({
-    accept: "PHONE_LAYOUT", // Acepta elementos de este tipo
-    drop: (item) => onDrop(item), // Maneja el drop
+    accept: "PHONE_LAYOUT",
+    drop: (item) => onDrop(item),
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
@@ -29,20 +28,17 @@ export const DropTarget = ({ onDrop, children }) => {
   );
 };
 
-export const Smishing = ({
-  onChooseOption,
-  content,
-}: {
+type SmishingProps = {
+  content: SmsContentData;
   onChooseOption: (option: boolean) => void;
-  content: ContentData | SmishingData;
-}) => {
-  // @ts-expect-error Fix type
-  const handleDropPositive = (item) => {
+};
+
+export const Smishing = ({ onChooseOption, content }: SmishingProps) => {
+  const handleDropPositive = () => {
     onChooseOption(true);
   };
 
-  // @ts-expect-error Fix type
-  const handleDropNegative = (item) => {
+  const handleDropNegative = () => {
     onChooseOption(false);
   };
 
@@ -56,9 +52,8 @@ export const Smishing = ({
       </DropTarget>
 
       <PhoneLayout>
-        {/* @ts-expect-error Fix type */}
         <PhoneNavbar phoneNumber={content.number} />
-        {/* @ts-expect-error Fix type */}
+
         <PhoneMessage phoneMessage={content.message} />
       </PhoneLayout>
 

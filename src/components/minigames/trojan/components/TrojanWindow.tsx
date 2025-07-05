@@ -1,7 +1,7 @@
-import Star from "./star.svg";
-import { ansOption } from "./options";
 import { useEffect, useState } from "react";
-import { useTrojanGame } from "../../../../context/TrojanGameContext";
+import Star from "/assets/img/star.svg";
+import { useTrojanGame } from "@/context/TrojanGameContext";
+import ansOption from "./options";
 
 export const TrojanWindow = () => {
   const { state, accuracy, removeEnemyById, updateScore, answerQuestion } =

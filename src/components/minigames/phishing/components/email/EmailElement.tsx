@@ -1,6 +1,6 @@
 import { IoIosClose } from "react-icons/io";
 import { IoWarningOutline } from "react-icons/io5";
-import { EmailElementType } from "../../../../../types";
+import { EmailElementType } from "@/types/phishing";
 
 export const EmailElement = ({
   element,

@@ -1,14 +1,22 @@
-import { ContentData, SmishingData } from "../../../../types";
-import {
-  GameImage,
-  GameLayout,
-  Message,
-  NextScreenButton,
-  Score,
-} from "../components/common";
-import { FeedbackItem, ScoreSummary } from "../components/feedback";
+import { EmailContentData, PhishingContent } from "@/types/phishing";
+import { emailsData } from "@/components/minigames/phishing/data";
+import { GameLayout } from "@/components/minigames/phishing/components/common/GameLayout";
+import { Score } from "@/components/minigames/phishing/components/common/Score";
+import { NextScreenButton } from "@/components/minigames/phishing/components/common/NextScreenButton";
+import { Message } from "@/components/minigames/phishing/components/common/Message";
+import { GameImage } from "@/components/common/GameImage";
+import { FeedbackPhishing } from "@/components/minigames/phishing/components/feedback/FeedbackPhishing";
+import { FeedbackSmishing } from "@/components/minigames/phishing/components/feedback/FeedbackSmishing";
 
-import { emailsData } from "../data";
+type FeedbackProps = {
+  content: PhishingContent;
+  positiveFeedback: boolean | null;
+  index: number;
+  score: number;
+  additionalPoints: number[];
+  onScreen: () => void;
+  onFinishGame: () => void;
+};
 
 export const Feedback = ({
   content,
@@ -18,15 +26,7 @@ export const Feedback = ({
   index,
   score,
   additionalPoints,
-}: {
-  content: ContentData | SmishingData;
-  positiveFeedback: boolean | null;
-  index: number;
-  score: number;
-  additionalPoints: number[];
-  onScreen: () => void;
-  onFinishGame: () => void;
-}) => {
+}: FeedbackProps) => {
   const isCorrect = content.isSuspicious === positiveFeedback;
   const finalLevel = emailsData.length - 1 === index;
   const answer = isCorrect ? "Correcta ✅" : "Incorrecta ❌";
@@ -41,51 +41,19 @@ export const Feedback = ({
             <h3 className={`text-4xl ${bgColor} p-2 w-max rounded-md`}>
               <span className="font-bold">Respuesta:</span> {answer}
             </h3>
-            {/* @ts-expect-error Fix type */}
-            {!content.isSmishing && (
-              <div className="flex flex-col gap-4 mt-12 text-2xl mb-6">
-                <FeedbackItem item="Asunto">
-                  {/* @ts-expect-error Fix type */}
-                  {content.feedback.subject}
-                </FeedbackItem>
-                <FeedbackItem item="Remitente">
-                  {/* @ts-expect-error Fix type */}
-                  {content.feedback.sender}
-                </FeedbackItem>
-                <FeedbackItem item="Correo electrónico">
-                  {/* @ts-expect-error Fix type */}
-                  {content.feedback.email}
-                </FeedbackItem>
-                <FeedbackItem item="Mensaje">
-                  {/* @ts-expect-error Fix type */}
-                  {content.feedback.body}
-                </FeedbackItem>
 
-                <ScoreSummary
-                  correctAnswer={isCorrect}
-                  additionalPoints={additionalPoints}
-                  content={content}
-                />
-              </div>
-            )}
-            {/* @ts-expect-error Fix type */}
-            {content.isSmishing && (
-              <div className="flex flex-col gap-4 mt-12 text-2xl mb-6">
-                <FeedbackItem item="Número telefónico">
-                  {/* @ts-expect-error Fix type */}
-                  {content.feedback.number}
-                </FeedbackItem>
-                <FeedbackItem item="Mensaje">
-                  {/* @ts-expect-error Fix type */}
-                  {content.feedback.message}
-                </FeedbackItem>
-
-                <ScoreSummary
-                  correctAnswer={isCorrect}
-                  additionalPoints={additionalPoints}
-                  content={content}
-                />
-              </div>
+            {!content.isSmishing ? (
+              <FeedbackPhishing
+                content={content as EmailContentData}
+                isCorrect={isCorrect}
+                additionalPoints={additionalPoints}
+              />
+            ) : (
+              <FeedbackSmishing
+                content={content}
+                isCorrect={isCorrect}
+                additionalPoints={additionalPoints}
+              />
             )}
 
             {!finalLevel && (
@@ -104,14 +72,12 @@ export const Feedback = ({
               <p className="font-bold">
                 ⛔ Tipo de ataque:{" "}
                 <span className="font-normal">
-                  {/* @ts-expect-error Fix type */}
                   {content.isSmishing ? "Smishing" : "Phishing"}
                 </span>
               </p>
             </Message>
             <div
               className="justify-self-center"
-              // @ts-expect-error Fix type
               style={content.isSmishing ? { width: "35%" } : {}}
             >
               <GameImage
