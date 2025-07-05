@@ -8,13 +8,6 @@ export const ROTATION_SPEED = degToRad(0.8);
 // Phishing game
 export const MIN_SCORE = 100;
 
-// export const emailElements = {
-//   SUBJECT: "Asunto",
-//   SENDER: "Remitente",
-//   EMAIL: "Correo electrónico",
-//   BODY: "Mensaje",
-// };
-
 export const DIFFICULTY = {
   EASY: "Fácil",
   MID: "Media",
@@ -27,3 +20,9 @@ export const EMAIL_PARTS = {
   email: "Correo electrónico",
   body: "Mensaje",
 };
+
+// Character
+export const PROXIMITY_THRESHOLD = 0.6;
+export const PHISHING_TRIGGER_POSITION = { x: -9.51, y: -6.06, z: 1.27 };
+export const PHISHING_SAFE_POSITION = { x: -8.56, y: -6.13, z: 2.66 };
+export const TROJAN_TRIGGER_POSITION = { x: -16.91, y: -5.08, z: -11.99 };

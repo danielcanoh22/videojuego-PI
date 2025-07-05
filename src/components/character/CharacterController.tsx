@@ -11,13 +11,16 @@ import { Character } from "./Character";
 import { useUI } from "@/context/UIContext";
 import { usePhishingGame } from "@/context/PhishingGameContext";
 import { useTrojanGame } from "@/context/TrojanGameContext";
-import { ROTATION_SPEED, RUN_SPEED, WALK_SPEED } from "@/utils/constants";
+import {
+  PHISHING_SAFE_POSITION,
+  PHISHING_TRIGGER_POSITION,
+  PROXIMITY_THRESHOLD,
+  ROTATION_SPEED,
+  RUN_SPEED,
+  TROJAN_TRIGGER_POSITION,
+  WALK_SPEED,
+} from "@/utils/constants";
 import { lerpAngle } from "@/utils/helpers";
-
-const PROXIMITY_THRESHOLD = 0.6;
-const PHISHING_TRIGGER_POSITION = { x: -9.51, y: -6.06, z: 1.27 };
-const PHISHING_SAFE_POSITION = { x: -8.56, y: -6.13, z: 2.66 };
-const TROJAN_TRIGGER_POSITION = { x: -16.91, y: -5.08, z: -11.99 };
 
 export const CharacterController = () => {
   const { state: uiState } = useUI();
