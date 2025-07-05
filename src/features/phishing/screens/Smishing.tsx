@@ -2,9 +2,9 @@ import { useDrop } from "react-dnd";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { SmsContentData } from "@/types/phishing";
-import { PhoneLayout } from "@/components/minigames/phishing/components/phone/PhoneLayout";
-import { PhoneNavbar } from "@/components/minigames/phishing/components/phone/PhoneNavbar";
-import { PhoneMessage } from "@/components/minigames/phishing/components/phone/PhoneMessage";
+import { PhoneLayout } from "@/features/phishing/components/phone/PhoneLayout";
+import { PhoneNavbar } from "@/features/phishing/components/phone/PhoneNavbar";
+import { PhoneMessage } from "@/features/phishing/components/phone/PhoneMessage";
 
 export const DropTarget = ({ onDrop, children }) => {
   const [{ isOver }, drop] = useDrop(() => ({

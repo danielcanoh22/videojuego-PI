@@ -8,8 +8,8 @@ import {
 import { DIFFICULTY } from "@/utils/constants";
 import { Phishing } from "./Phishing";
 import { Smishing } from "./Smishing";
-import { GameLayout } from "@/components/minigames/phishing/components/common/GameLayout";
-import { Score } from "@/components/minigames/phishing/components/common/Score";
+import { GameLayout } from "@/features/phishing/components/common/GameLayout";
+import { Score } from "@/features/phishing/components/common/Score";
 
 type GameContentProps = {
   content: PhishingContent;

@@ -3,9 +3,9 @@ import { OrthographicCamera as ThreeOrthographicCamera } from "three";
 import { Physics } from "@react-three/rapier";
 import { useRef } from "react";
 import { Map } from "./Map";
-import { CharacterController } from "@/components/character/CharacterController";
+import { CharacterController } from "@/features/character/CharacterController";
 import { useTrojanGame } from "@/context/TrojanGameContext";
-import { EnemySpawner } from "@/components/minigames/trojan/EnemySpawner";
+import { EnemySpawner } from "@/features/trojan/EnemySpawner";
 
 const maps: Record<
   string,

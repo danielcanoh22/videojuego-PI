@@ -1,10 +1,10 @@
 import { usePhishingGame } from "@/context/PhishingGameContext";
 import { MIN_SCORE } from "@/utils/constants";
-import { GameLayout } from "@/components/minigames/phishing/components/common/GameLayout";
+import { GameLayout } from "@/features/phishing/components/common/GameLayout";
 import { GameImage } from "@/components/common/GameImage";
-import { Message } from "@/components/minigames/phishing/components/common/Message";
-import { Tips } from "@/components/minigames/phishing/components/gameover/Tips";
-import { NextScreenButton } from "@/components/minigames/phishing/components/common/NextScreenButton";
+import { Message } from "@/features/phishing/components/common/Message";
+import { Tips } from "@/features/phishing/components/gameover/Tips";
+import { NextScreenButton } from "@/features/phishing/components/common/NextScreenButton";
 
 type GameOverProps = {
   screen: number;

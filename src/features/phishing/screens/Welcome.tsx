@@ -1,6 +1,6 @@
 import { usePhishingGame } from "@/context/PhishingGameContext";
 import { GameImage } from "@/components/common/GameImage";
-import { NextScreenButton } from "@/components/minigames/phishing/components/common/NextScreenButton";
+import { NextScreenButton } from "@/features/phishing/components/common/NextScreenButton";
 
 export const Welcome = ({ onNextSection }: { onNextSection: () => void }) => {
   const { closePhishingGame } = usePhishingGame();

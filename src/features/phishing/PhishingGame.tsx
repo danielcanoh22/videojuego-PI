@@ -10,6 +10,7 @@ import { Tutorial } from "./screens/Tutorial";
 import { GameContent } from "./screens/GameContent";
 import { Feedback } from "./screens/Feedback";
 import { GameOver } from "./screens/GameOver";
+import { MIN_SCORE } from "@/utils/constants";
 
 export const PhishingGame = () => {
   const { winGame } = usePhishingGame();
@@ -78,7 +79,9 @@ export const PhishingGame = () => {
 
   const handleFinishGame = () => {
     setScreen(4);
-    winGame();
+    if (score >= MIN_SCORE) {
+      winGame();
+    }
   };
 
   useEffect(() => {

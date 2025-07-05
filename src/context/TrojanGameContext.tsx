@@ -10,7 +10,7 @@ import {
 import { useUI } from "./UIContext";
 import { Coordinates, Enemy } from "@/types/trojan";
 import { getUniqueRandomPositions } from "@/utils/helpers";
-import enemyPositions from "@/components/minigames/trojan/data/enemyPositions.json";
+import enemyPositions from "@/features/trojan/data/enemyPositions.json";
 
 type GameState = "inactive" | "home" | "running" | "question" | "won" | "lost";
 

@@ -1,12 +1,12 @@
 import { EmailContentData, PhishingContent } from "@/types/phishing";
-import { emailsData } from "@/components/minigames/phishing/data";
-import { GameLayout } from "@/components/minigames/phishing/components/common/GameLayout";
-import { Score } from "@/components/minigames/phishing/components/common/Score";
-import { NextScreenButton } from "@/components/minigames/phishing/components/common/NextScreenButton";
-import { Message } from "@/components/minigames/phishing/components/common/Message";
+import { emailsData } from "@/features/phishing/data";
+import { GameLayout } from "@/features/phishing/components/common/GameLayout";
+import { Score } from "@/features/phishing/components/common/Score";
+import { NextScreenButton } from "@/features/phishing/components/common/NextScreenButton";
+import { Message } from "@/features/phishing/components/common/Message";
 import { GameImage } from "@/components/common/GameImage";
-import { FeedbackPhishing } from "@/components/minigames/phishing/components/feedback/FeedbackPhishing";
-import { FeedbackSmishing } from "@/components/minigames/phishing/components/feedback/FeedbackSmishing";
+import { FeedbackPhishing } from "@/features/phishing/components/feedback/FeedbackPhishing";
+import { FeedbackSmishing } from "@/features/phishing/components/feedback/FeedbackSmishing";
 
 type FeedbackProps = {
   content: PhishingContent;

@@ -1,5 +1,5 @@
 import { useTrojanGame } from "@/context/TrojanGameContext";
-import { EnemyController } from "@/components/character/EnemyController";
+import { EnemyController } from "@/features/character/EnemyController";
 
 export const EnemySpawner = () => {
   const { state } = useTrojanGame();

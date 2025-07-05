@@ -1,9 +1,9 @@
 import { EmailContentData, EmailElementType } from "@/types/phishing";
-import { EmailLayout } from "@/components/minigames/phishing/components/email/EmailLayout";
-import { EmailContent } from "@/components/minigames/phishing/components/email/EmailContent";
-import { Message } from "@/components/minigames/phishing/components/common/Message";
-import { EmailElement } from "@/components/minigames/phishing/components/email/EmailElement";
-import { GameButton } from "@/components/minigames/phishing/components/common/GameButton";
+import { EmailLayout } from "@/features/phishing/components/email/EmailLayout";
+import { EmailContent } from "@/features/phishing/components/email/EmailContent";
+import { Message } from "@/features/phishing/components/common/Message";
+import { EmailElement } from "@/features/phishing/components/email/EmailElement";
+import { GameButton } from "@/features/phishing/components/common/GameButton";
 
 type PhishingProps = {
   content: EmailContentData;

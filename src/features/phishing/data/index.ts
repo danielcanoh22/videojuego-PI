@@ -1,4 +1,4 @@
-import { PhishingContent } from "../../../../types/phishing";
+import { PhishingContent } from "@/types/phishing";
 
 export const emailsData: PhishingContent[] = [
   {
