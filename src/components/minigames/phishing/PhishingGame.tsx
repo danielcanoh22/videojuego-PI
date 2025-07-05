@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { Window } from "../../layout/Window";
 import { Welcome, Tutorial, GameContent, Feedback, GameOver } from "./screens";
-
 import { emailsData } from "./data";
-import { EmailElementType } from "../../../types";
+import { EmailContentData, EmailElementType } from "../../../types";
 import { calcScore } from "../../../utils";
-import { useGame } from "../../../context/GameContext";
+import { usePhishingGame } from "../../../context/PhishingGameContext";
 
 export const PhishingGame = () => {
-  const { setWonPhishing } = useGame();
+  const { winGame } = usePhishingGame();
 
   const [screen, setScreen] = useState(0);
   const [positiveAnswer, setPositiveAnswer] = useState<boolean | null>(null);
@@ -47,9 +46,7 @@ export const PhishingGame = () => {
       if (option && !elements.length) return;
 
       if (option === currentEmail.isSuspicious) {
-        /* @ts-expect-error Fix type */
-        const points = calcScore(elements, currentEmail);
-
+        const points = calcScore(elements, currentEmail as EmailContentData);
         setAdditionalPoints(points);
       }
     }
@@ -76,10 +73,7 @@ export const PhishingGame = () => {
 
   const handleFinishGame = () => {
     setScreen(4);
-
-    setTimeout(() => {
-      setWonPhishing(true);
-    }, 2000);
+    winGame();
   };
 
   useEffect(() => {

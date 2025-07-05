@@ -1,4 +1,4 @@
-import { useGame } from "../../../../context/GameContext";
+import { usePhishingGame } from "../../../../context/PhishingGameContext";
 import { MIN_SCORE } from "../../../../utils";
 import {
   GameImage,
@@ -8,7 +8,6 @@ import {
 } from "../components/common";
 import { Tips } from "../components/gameover/Tips";
 
-// TODO: implementar la pantalla final del minijuego
 export const GameOver = ({
   screen,
   score,
@@ -18,7 +17,7 @@ export const GameOver = ({
   score: number;
   onRestart: () => void;
 }) => {
-  const { closePhishingGame } = useGame();
+  const { closePhishingGame } = usePhishingGame();
 
   const wonTheGame = score >= MIN_SCORE;
   const positiveMessage =

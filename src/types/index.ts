@@ -19,35 +19,36 @@ export interface EmailElementType {
   name: string;
 }
 
-export interface ContentData {
+interface BaseContent {
+  isSuspicious: boolean;
+  difficulty: string;
+  feedback: {
+    image: string;
+    number?: string;
+    message?: string;
+    subject?: string;
+    sender?: string;
+    email?: string;
+    body?: string;
+  };
+}
+
+export interface EmailContentData extends BaseContent {
+  isSmishing: false;
   subject: string;
   sender: string;
   email: string;
   body: string;
-  isSuspicious: boolean;
-  difficulty: string;
   suspiciousItems: string[];
-  feedback: {
-    subject: string;
-    sender: string;
-    email: string;
-    body: string;
-    image: string;
-  };
 }
 
-export interface SmishingData {
-  isSmishing: boolean;
+export interface SmsContentData extends BaseContent {
+  isSmishing: true;
   number: string;
   message: string;
-  isSuspicious: boolean;
-  difficulty: string;
-  feedback: {
-    number: string;
-    message: string;
-    image: string;
-  };
 }
+
+export type PhishingContent = EmailContentData | SmsContentData;
 
 export interface Enemy {
   id: number;

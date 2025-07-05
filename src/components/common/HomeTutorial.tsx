@@ -1,9 +1,9 @@
-import { useGame } from "../../context/GameContext";
+import { useUI } from "../../context/UIContext";
 import { GameImage } from "../minigames/phishing/components/common";
 import { HomeScreenButton } from "./HomeScreenButton";
 
 export const HomeTutorial = () => {
-  const { setHomeTutorial } = useGame();
+  const { showControls } = useUI();
 
   return (
     <div className="flex flex-col items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-200 z-50 w-2/3 p-8 rounded-md">
@@ -31,9 +31,7 @@ export const HomeTutorial = () => {
           />
         </div>
         <div className="flex justify-center">
-          <HomeScreenButton onClick={setHomeTutorial}>
-            Continuar
-          </HomeScreenButton>
+          <HomeScreenButton onClick={showControls}>Continuar</HomeScreenButton>
         </div>
       </div>
     </div>

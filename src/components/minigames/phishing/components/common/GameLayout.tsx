@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { ReactNode } from "react";
 import { GameImage } from "./GameImage";
 import { NextScreenButton } from "./NextScreenButton";
-import { useGame } from "../../../../../context/GameContext";
+import { usePhishingGame } from "../../../../../context/PhishingGameContext";
 
 export const GameLayout = ({
   children,
@@ -12,7 +12,7 @@ export const GameLayout = ({
   children: ReactNode;
   screen?: number;
 }) => {
-  const { closePhishingGame } = useGame();
+  const { closePhishingGame } = usePhishingGame();
 
   const handleExitGame = () => {
     Swal.fire({

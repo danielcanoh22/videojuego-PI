@@ -1,8 +1,8 @@
-import { useGame } from "../../context/GameContext";
+import { useUI } from "../../context/UIContext";
 import { HomeScreenButton } from "./HomeScreenButton";
 
 export const CreditsScreen = () => {
-  const { closeCreditsScreen } = useGame();
+  const { showHomeScreen } = useUI();
 
   return (
     <div className="fixed top-0 left-0 bg-blue-200 w-screen h-screen z-[100] text-black flex flex-col items-center p-20">
@@ -60,7 +60,7 @@ export const CreditsScreen = () => {
         <p>Alejandra Díaz Hernández</p>
       </div>
       <div className="z-10 mt-20">
-        <HomeScreenButton onClick={closeCreditsScreen}>Atrás</HomeScreenButton>
+        <HomeScreenButton onClick={showHomeScreen}>Atrás</HomeScreenButton>
       </div>
     </div>
   );

@@ -2,12 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { GameProvider } from "./context/GameContext.tsx";
+import { UIProvider } from "./context/UIContext.tsx";
+import { TrojanGameProvider } from "./context/TrojanGameContext.tsx";
+import { PhishingGameProvider } from "./context/PhishingGameContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <GameProvider>
-      <App />
-    </GameProvider>
+    <UIProvider>
+      <TrojanGameProvider>
+        <PhishingGameProvider>
+          <App />
+        </PhishingGameProvider>
+      </TrojanGameProvider>
+    </UIProvider>
   </React.StrictMode>
 );

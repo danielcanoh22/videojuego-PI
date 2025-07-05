@@ -1,35 +1,34 @@
 import { useEffect, useState } from "react";
-import { useGame } from "../../context/GameContext";
+import { useUI } from "../../context/UIContext";
 
 export const HomeControls = () => {
-  const { showHomeControls, showHomeTutorial } = useGame();
+  const { hideCurrentScreen } = useUI();
+
   const [showMessage, setShowMessage] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    if (!showHomeTutorial) {
-      // Temporizador para mostrar el mensaje después de 2 segundos
-      const showTimer = setTimeout(() => {
-        setShowMessage(true);
-        // Temporizador para desvanecer el mensaje después de 5 segundos
-        const fadeTimer = setTimeout(() => {
-          setFadeOut(true);
-          const fadeOutTimer = setTimeout(() => {
-            setShowMessage(false);
-            setFadeOut(false);
-          }, 500); // Duración del desvanecimiento
-          return () => clearTimeout(fadeOutTimer);
-        }, 7000); // Duración antes de comenzar a desvanecerse
+    const showTimer = setTimeout(() => {
+      setShowMessage(true);
 
-        return () => clearTimeout(fadeTimer);
-      }, 1500); // 2 segundos para mostrar el mensaje
+      const fadeTimer = setTimeout(() => {
+        setFadeOut(true);
 
-      // Limpiar el temporizador al desmontar el componente
-      return () => clearTimeout(showTimer);
-    }
-  }, [showHomeTutorial]);
+        const cleanUpTimer = setTimeout(() => {
+          setShowMessage(false);
+          hideCurrentScreen();
+        }, 500);
 
-  if (!showHomeControls) return null;
+        return () => clearTimeout(cleanUpTimer);
+      }, 7000);
+
+      return () => clearTimeout(fadeTimer);
+    }, 1500);
+
+    return () => clearTimeout(showTimer);
+  }, [hideCurrentScreen]); // L
+
+  if (!showMessage) return null;
 
   return (
     <>

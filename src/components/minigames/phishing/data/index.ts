@@ -1,4 +1,6 @@
-export const emailsData = [
+import { PhishingContent } from "../../../../types";
+
+export const emailsData: PhishingContent[] = [
   {
     isSmishing: true,
     number: "+57 315 4241122",
@@ -15,6 +17,7 @@ export const emailsData = [
     },
   },
   {
+    isSmishing: false,
     subject: "Actualizar método de pago de Netflix",
     sender: "raul ruiz",
     email: "netfl1x-soporte@gmail.com",
@@ -33,6 +36,7 @@ export const emailsData = [
     },
   },
   {
+    isSmishing: false,
     subject: "Actualización de seguridad de PayPal",
     sender: "PayPal Security",
     email: "security@paypa1.com",
@@ -64,6 +68,7 @@ export const emailsData = [
     },
   },
   {
+    isSmishing: false,
     subject: "Confirmación de tu pedido en Amazon",
     sender: "Amazon Support",
     email: "noreply@amazon.com",

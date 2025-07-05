@@ -1,4 +1,10 @@
-import { ContentData, Coordinates, EmailElementType } from "../types";
+import {
+  Coordinates,
+  EmailContentData,
+  EmailElementType,
+  PhishingContent,
+  SmsContentData,
+} from "../types";
 
 const normalizeAngle = (angle: number) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
@@ -23,14 +29,16 @@ export const lerpAngle = (start: number, end: number, t: number) => {
 
 export const calcScore = (
   elementList: EmailElementType[],
-  email: ContentData
+  email: EmailContentData
 ) => {
   let pointsEarned = 0;
   let lostPoints = 0;
 
+  const items = email.suspiciousItems ?? [];
+
   elementList.forEach((el) => {
-    if (email.suspiciousItems.includes(el.name)) pointsEarned += 10;
-    if (!email.suspiciousItems.includes(el.name)) lostPoints -= 5;
+    if (items.includes(el.name)) pointsEarned += 10;
+    if (!items.includes(el.name)) lostPoints -= 5;
   });
 
   return [pointsEarned, lostPoints];

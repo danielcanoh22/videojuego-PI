@@ -1,8 +1,8 @@
-import { useGame } from "../../../../context/GameContext";
+import { usePhishingGame } from "../../../../context/PhishingGameContext";
 import { GameImage, NextScreenButton } from "../components/common";
 
 export const Welcome = ({ onNextSection }: { onNextSection: () => void }) => {
-  const { closePhishingGame } = useGame();
+  const { closePhishingGame } = usePhishingGame();
 
   return (
     <div className="bg-transparent w-full h-full rounded-lg p-4 relative">

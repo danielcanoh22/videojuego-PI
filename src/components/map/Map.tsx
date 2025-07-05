@@ -29,7 +29,6 @@ export const Map = ({ model, ...props }: MapProps) => {
 
   return (
     <group>
-      {/* Genera automáticamente colisiones para todos los elementos del mapa */}
       <RigidBody type="fixed" colliders="trimesh">
         <primitive object={scene} {...props} ref={group} />
       </RigidBody>

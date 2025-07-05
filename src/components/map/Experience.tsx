@@ -5,9 +5,7 @@ import { Physics } from "@react-three/rapier";
 import { CharacterController } from "../character/CharacterController";
 import { OrthographicCamera as ThreeOrthographicCamera } from "three";
 import { EnemySpawner } from "../minigames/trojan/EnemySpawner";
-import { useGame } from "../../context/GameContext";
-
-// SE LLAMA TODO - MAPA, ARCHIVO CHARACTER
+import { useTrojanGame } from "../../context/TrojanGameContext";
 
 const maps: Record<
   string,
@@ -24,7 +22,9 @@ const MAP_NAME = "map2";
 export const Experience = () => {
   const shadowCameraRef = useRef<ThreeOrthographicCamera>(null);
 
-  const { isActiveTrojanGame } = useGame();
+  const { state } = useTrojanGame();
+  const { gameState } = state;
+  const isGameActive = gameState === "running";
 
   return (
     <>
@@ -47,7 +47,6 @@ export const Experience = () => {
         />
       </directionalLight>
 
-      {/* Se envuelven todos los elementos que deben ser afectados por las físicas */}
       <Physics key={MAP_NAME}>
         <Map
           scale={maps[MAP_NAME].scale}
@@ -55,7 +54,7 @@ export const Experience = () => {
           model={`/assets/models/${MAP_NAME}.glb`}
         />
         <CharacterController />
-        {isActiveTrojanGame && <EnemySpawner enemyCount={3} />}
+        {isGameActive && <EnemySpawner enemyCount={3} />}
       </Physics>
     </>
   );
